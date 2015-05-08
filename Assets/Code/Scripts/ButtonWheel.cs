@@ -20,8 +20,19 @@ public class ButtonWheel : MonoBehaviour {
 
 	void Update () 
 	{
-		if(CheckDeltaSwipe())
+		if(Input.GetMouseButton(0))
+		//if(GestureHandler.gestureState == GestureState.SwipeCompleted)
 		{
+			for(int a = 0; a < buttons.Length;a++)
+			{
+				if(!buttons[a].interpComplete)
+					return;
+			}
+
+			int incrementIndex = 1;
+			if(GestureHandler.touchDelta.x > 0)
+				incrementIndex = -1;
+
 			for(int i = 0;i < buttons.Length;i++)
 			{
 				buttons[i].GetComponent<Button>().interactable = false;
@@ -38,13 +49,12 @@ public class ButtonWheel : MonoBehaviour {
 						continue;
 					}
 
-					if(j + 1 >= _wheelPoints.Length)
+					if(j + incrementIndex >= _wheelPoints.Length)
 						buttons[i].StartInterpolation(_wheelPoints[0]);
-					else if(j + 1 < _wheelPoints.Length)
-						buttons[i].StartInterpolation(_wheelPoints[j + 1]);
+					else if(j + incrementIndex < 0)
+						buttons[i].StartInterpolation(_wheelPoints[_wheelPoints.Length -1]);
 					else
-						Debug.Log(buttons[i].gameObject.name + " Failed to Start Interpolation");
-
+						buttons[i].StartInterpolation(_wheelPoints[j + incrementIndex]);
 					break;
 				}
 			}
@@ -116,8 +126,13 @@ public class ButtonWheel : MonoBehaviour {
 
 		Vector3 delta = Input.GetTouch (0).deltaPosition;
 		Vector3 start = Input.GetTouch (0).position;
+		float distance = Vector3.Distance (start, delta);
 
-		if (Vector3.Distance (start, delta) > 1)
+		ScreenDebug.DrawText ("Delta Touch : " + delta, 0);
+		ScreenDebug.DrawText ("Touse Position : " + start, 1);
+		ScreenDebug.DrawText ("Distance : " + distance, 2);
+
+		if (distance > 1)
 			return true;
 		else
 			return false;

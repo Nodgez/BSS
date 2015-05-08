@@ -15,6 +15,8 @@ public class MenuButton : MonoBehaviour{
 	private Vector3 pos_InterpEnd;
 	private float _interpPercent = 1;
 
+	public bool interpComplete = true;
+
 	void Start () 
 	{
 		_image = GetComponent<Image> ();
@@ -23,7 +25,10 @@ public class MenuButton : MonoBehaviour{
 	void Update () 
 	{
 		if (_interpPercent >= 1)
+		{
+			interpComplete = true;
 			return;
+		}
 
 		_interpPercent += Time.deltaTime * 5;
 		_interpPercent = Mathf.Clamp (_interpPercent, 0, 1);
@@ -34,10 +39,8 @@ public class MenuButton : MonoBehaviour{
 
 	public void StartInterpolation(WheelPoint wheelPoint)
 	{
-		if (_interpPercent < 1)
-			return;
-
 		_interpPercent = 0;
+		interpComplete = false;
 		pos_InterpEnd = wheelPoint.position;
 		pos_InterpStart = transform.position;
 
@@ -48,8 +51,5 @@ public class MenuButton : MonoBehaviour{
 		col_InterpStart = _image.color.a;
 
 		transform.SetSiblingIndex (wheelPoint.siblingIndex);
-
-		if (pos_InterpEnd == pos_InterpStart)
-			Debug.Log ("Error Points the Same");
 	}
 }
