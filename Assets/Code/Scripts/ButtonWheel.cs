@@ -3,64 +3,70 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 
+//This class manages the buttons dissplayed by the main menu
 public class ButtonWheel : MonoBehaviour {
 
 	public MenuButton[] buttons;
 	public int i_SelectedButton = 0;
 
-	public WheelPoint[] _wheelPoints;
-	Vector3 center;
+	private WheelPoint[] _wheelPoints;
+	private Vector3 _center;
 
 	void Start () 
 	{
 		_wheelPoints = new WheelPoint[buttons.Length];
-		center = new Vector3 (Screen.width * 0.5f, Screen.height * 0.5f, 0);
-		SetUpWheel (center, 100);
+		_center = new Vector3 (Screen.width * 0.5f, Screen.height * 0.5f, 0);
+		SetUpWheel (_center, 2);
 	}
 
 	void Update () 
 	{
-		if(Input.GetMouseButton(0))
-		//if(GestureHandler.gestureState == GestureState.SwipeCompleted)
+		//checks for a finised swipe event
+		if(GestureHandler.gestureState == GestureState.SwipeCompleted)
 		{
+			//checks all buttons have completed interpolating
 			for(int a = 0; a < buttons.Length;a++)
 			{
 				if(!buttons[a].interpComplete)
 					return;
 			}
 
+			//sets direction of wheel cycle
 			int incrementIndex = 1;
 			if(GestureHandler.touchDelta.x > 0)
 				incrementIndex = -1;
 
 			for(int i = 0;i < buttons.Length;i++)
 			{
-				buttons[i].GetComponent<Button>().interactable = false;
-				Vector3 buttonPos = buttons[i].transform.position;
+				buttons[i].GetComponent<Button>().interactable = false;	//disable button
+				Vector3 buttonPos = buttons[i].transform.position;		//button's position
 				for(int j = 0; j < _wheelPoints.Length;j++)
 				{
+					//ensure that both rounded to check accurately
 					RoundVector(ref buttonPos);
 					RoundVector(ref _wheelPoints[j].position);
 
+					//if the button is not at this point in the wheel then continue to the next wheel point
 					if(buttonPos != _wheelPoints[j].position)
-					{
-						if(i == _wheelPoints.Length -1 && j == _wheelPoints.Length -1)
-							Debug.Log("Last button Checked");
 						continue;
-					}
 
+					//start interpolating button to the next wheel point values
 					if(j + incrementIndex >= _wheelPoints.Length)
 						buttons[i].StartInterpolation(_wheelPoints[0]);
 					else if(j + incrementIndex < 0)
 						buttons[i].StartInterpolation(_wheelPoints[_wheelPoints.Length -1]);
 					else
 						buttons[i].StartInterpolation(_wheelPoints[j + incrementIndex]);
-					break;
+
+					break;	//exit the search for wheel points
 				}
 			}
-			i_SelectedButton --;
+			//set the current button index
+			i_SelectedButton += incrementIndex;
 			if(i_SelectedButton < 0)
 				i_SelectedButton = buttons.Length - 1;
+			else if (i_SelectedButton >= buttons.Length)
+				i_SelectedButton = 0;
 
 			buttons[i_SelectedButton].GetComponent<Button>().interactable = true;
 		}
@@ -80,7 +86,6 @@ public class ButtonWheel : MonoBehaviour {
 			float x = center.x + (size * 1.5f) * Mathf.Cos (-angle - (90 * Mathf.Deg2Rad));	
 			float y = center.y + size * Mathf.Sin (-angle - (90 * Mathf.Deg2Rad));
 			y = (float)Math.Round((double)y, 2);
-			Debug.Log("Y in SetUp : " + y);
 
 			if(i == halfway)
 			{
@@ -127,10 +132,6 @@ public class ButtonWheel : MonoBehaviour {
 		Vector3 delta = Input.GetTouch (0).deltaPosition;
 		Vector3 start = Input.GetTouch (0).position;
 		float distance = Vector3.Distance (start, delta);
-
-		ScreenDebug.DrawText ("Delta Touch : " + delta, 0);
-		ScreenDebug.DrawText ("Touse Position : " + start, 1);
-		ScreenDebug.DrawText ("Distance : " + distance, 2);
 
 		if (distance > 1)
 			return true;
