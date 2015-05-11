@@ -5,8 +5,15 @@ using System.Collections;
 public class ViewController : MonoBehaviour {
 
 	public Scrollbar controllingSlider;
-	private bool sliding = false;
+	private RectTransform rectTransform;
+	public bool sliding = false;
 	private float sliderDirection = -1.0f;
+
+	void Start()
+	{
+		rectTransform = transform as RectTransform;
+		rectTransform.offsetMax = new Vector2 (Screen.width, 0);
+	}
 
 	void Update () 
 	{
@@ -17,9 +24,8 @@ public class ViewController : MonoBehaviour {
 			float value = controllingSlider.value;
 			if(value >= 1 || value <= 0)
 			{
-				value = Mathf.Round(value);
+				controllingSlider.value = Mathf.Round(value);
 				sliding = !sliding;
-				sliderDirection *= -1;
 			}
 		}
 	}
@@ -28,6 +34,7 @@ public class ViewController : MonoBehaviour {
 	public void SlideView()
 	{
 		float value = controllingSlider.value;
+		value = Mathf.Round (value);
 		if (value <= 0 || value >= 1)
 		{
 			sliding = !sliding;

@@ -30,7 +30,9 @@ public class AppsPanel : MonoBehaviour {
 
 		e_CurrentAction = (AppActions)actionIndex;
 		_actionInstance = Instantiate <GameObject>(actions [actionIndex]);
-		_actionInstance.transform.SetParent (this.transform);
+		RectTransform actionTransform = _actionInstance.transform as RectTransform;
+		actionTransform.SetParent(this.transform);
+		actionTransform.localScale = Vector3.one;
 
 		RectTransform childTransform = _actionInstance.GetComponentInChildren<RectTransform> ();
 		childTransform.offsetMax = Vector2.zero;

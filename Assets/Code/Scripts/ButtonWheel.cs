@@ -15,8 +15,10 @@ public class ButtonWheel : MonoBehaviour {
 	void Start () 
 	{
 		_wheelPoints = new WheelPoint[buttons.Length];
-		_center = new Vector3 (Screen.width * 0.5f, Screen.height * 0.5f, 0);
+		_center = Vector3.zero;
 		SetUpWheel (_center, 2);
+		RectTransform trans = transform as RectTransform;
+		trans.offsetMin = new Vector2 (0, Screen.height * 0.5f);
 	}
 
 	void Update () 
