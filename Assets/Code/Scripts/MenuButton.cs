@@ -41,7 +41,7 @@ public class MenuButton : MonoBehaviour, IFade{
 		_image.color = new Color (1, 1, 1, Mathf.Lerp (col_InterpStart, col_InterpEnd, _interpPercent));
 	}
 
-	public void StartInterpolation(WheelPoint wheelPoint)
+	public void StartInterpolation(WheelPoint wheelPoint, bool left)
 	{
 		//reset interpolation values
 		_interpPercent = 0;
@@ -51,7 +51,11 @@ public class MenuButton : MonoBehaviour, IFade{
 		pos_InterpEnd = wheelPoint.position;
 		pos_InterpStart = transform.position;
 		Vector3 difference = pos_InterpEnd - pos_InterpStart;
-		Vector3 perpendicular = new Vector3 (-difference.y, difference.x, 0) * 0.2f;	//get the perpendicular line
+		Vector3 perpendicular;
+		if (left)
+			perpendicular = new Vector3 (-difference.y, difference.x, 0) * 0.2f;	//get the perpendicular line
+		else
+			perpendicular = new Vector3 (difference.y, -difference.x) * 0.2f;
 		pos_InterpMiddle = pos_InterpStart + (difference * 0.5f) + perpendicular;
 
 		//set scale interp values
@@ -63,6 +67,7 @@ public class MenuButton : MonoBehaviour, IFade{
 		col_InterpStart = _image.color.a;
 
 		transform.SetSiblingIndex (wheelPoint.siblingIndex);
+		GetComponent<Button> ().interactable = wheelPoint.interactable;
 	}
 
 	//Cubic interpolation equation

@@ -29,7 +29,7 @@ public class GestureHandler : MonoBehaviour
 
 		if (gestureState == GestureState.Completed || gestureState == GestureState.SwipeCompleted)
 			gestureState = GestureState.None;
-#if UNITY_STANDALONE
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
  		CheckEventStateMouse ();
 #endif
 
@@ -160,10 +160,10 @@ public class GestureHandler : MonoBehaviour
 		if(Input.GetTouch(0).phase == TouchPhase.Moved)
 			CheckGestureMoveTouch();
 	
-			if(Input.GetTouch(0).phase == TouchPhase.Stationary)
-				CheakHold();
+		if(Input.GetTouch(0).phase == TouchPhase.Stationary)
+			CheakHold();
 
-			EndGestureTouch();
+		EndGestureTouch();
 	}
 	#endregion
 
