@@ -1,0 +1,71 @@
+Take a look at setup images to see how everything should be laid out.
+
+Background: Try David's 3D half spherical idea , 
+                      Otherwise it was supposed to just be a 2D image
+                      that moves left and right, up and down, when you put
+                      corresponding emotions by a certain degree and distance 
+                      feels right.
+
+Back/Next Buttons: these bring you to next or previous skill pages
+
+Calendar Button: opens up calendar aka Emotional History Diary.
+
+Cross: foreground at centre.
+
+DiarySingleBox: See setup, it is the box where information of the
+                           date and time and colour orb is saved. Not sure
+                           how you will code this. Maybe have to make a map
+                           of the image which selects a central colour  area 
+                           from screen.
+                           Notice how they become transparent behind frontal one
+                           adn you can see an inkling of the next date behind it.
+
+DiaryTransparentOverlay: When you press diary button this screen comes 
+                                           up exactly like in Diary Setup image.
+
+EmotionListBox: This is the box where the emotion list is.
+                             David made out a list of emotions which is in this folder
+                             It will be the same setup for the positive and emergency
+                             emotions but on different side of screen for emergency 
+                             emotions.
+                             
+EmotionListBoxIndicator: This scroll bar indicates how far up or down you 
+                                            are in the EmotionListBox.
+
+EmotionSingleBox:  When you select an emotion it appears directly on the 
+                                 colour spectrum where the word position is selected like
+                                 in the original beta app.
+                                 This single small box appears behind the word to make the text 
+                                 more visible over colour spectrum background.
+                                 Might need to be stretched and scaled depending on length 
+                                 of individual emotion text. (or a neutral size for all )
+
+EmotionSingleBoxClearButton: Small subtle X button on EmotionSingleBox to
+                                                    clear a selection.
+
+Foreground: This is a png file with cut out centre circle at 0 opacity transparency so the 
+                     colour spectrum can be put behind it and appear as a circle.
+                     If we decide to go with the 3d version it should work like this too.
+
+Instruction Arrows Left/Right : To be placed above instruction boxes.
+
+Instructionbox 1,2,3: To appear first time someone uses app, then disappear,
+                                   Possibly an option to turn them on again in about/help section
+                                   of main menu. User testing will determine this need later.
+
+InstructionBoxSingle: Just in case you want to put instruction text yourself
+                                    at some stage.
+
+MenuGUIButton: Brings you back to main menu orb selection straight away.
+                             We are not using the menu idea from the wireframes anymore.
+                             Just a simple button straight to main menu, because the
+                             the arrow buttons let you skip between skills anyway.
+
+OratorStd: This is the font for the Emotion lists and anything else.
+                  Make sure the font is same colour as setup images.
+                  Font will also be used for date and time in emotional history diary
+                  and to display date on the Emotional history calendar button (top right
+                  of EL) Again its just about getting the right colours for the font.
+
+                           
+
