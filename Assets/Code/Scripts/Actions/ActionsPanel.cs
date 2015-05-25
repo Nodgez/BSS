@@ -5,7 +5,6 @@ using System.Collections;
 public class ActionsPanel : MonoBehaviour {
 
 	public GameObject[] actions;
-
 	private GameObject _actionInstance;
 
 	public void StartAction(int actionIndex)
@@ -17,6 +16,7 @@ public class ActionsPanel : MonoBehaviour {
 		RectTransform actionTransform = _actionInstance.transform as RectTransform;
 		actionTransform.SetParent(this.transform);
 		actionTransform.localScale = Vector3.one;
+		actionTransform.SetAsFirstSibling ();
 
 		RectTransform childTransform = _actionInstance.GetComponentInChildren<RectTransform> ();
 		childTransform.offsetMax = Vector2.zero;

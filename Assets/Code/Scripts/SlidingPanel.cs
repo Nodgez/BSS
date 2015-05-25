@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class SlidingPanel : MonoBehaviour {
-
+	
 	public Scrollbar controllingSlider;
 	public bool sliding = false;
 	public float sliderDirection = -1.0f;
@@ -34,6 +34,14 @@ public class SlidingPanel : MonoBehaviour {
 		{
 			sliding = !sliding;
 			sliderDirection *= -1;
+		}
+	}
+
+	public bool IsSlid
+	{
+		get
+		{
+			return controllingSlider.value == 1;
 		}
 	}
 }

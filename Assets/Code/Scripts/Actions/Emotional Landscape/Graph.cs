@@ -7,12 +7,10 @@ using System.Collections.Generic;
 public class Graph : MonoBehaviour {
 
 	private ScrollRect _scrollRect;
-	private List<Emotion> emotions = new List<Emotion>();
+	private List<EmotionDisplay> emotions = new List<EmotionDisplay>();
 	private bool sliding = false;
 	private Vector2 lerpEnd;
 	private float lerpValue;
-
-	public GameObject baseEmoObject;
 
 	void Start () 
 	{
@@ -34,28 +32,39 @@ public class Graph : MonoBehaviour {
 			sliding = false;
 	}
 
-	public void AddEmotion(Emotion emotion)
+	public void AddEmotion(EmotionDisplay emotion, Vector2 direction)
 	{
-		if (emotions.Contains (emotion))
-			return;
-
 		sliding = true;
 		emotions.Add (emotion);
-		lerpEnd = _scrollRect.normalizedPosition + emotion.directionalValue;
+		lerpEnd = _scrollRect.normalizedPosition + direction;
 	}
 
-	public void RemoveEmotion(Emotion emotion)
+	public void RemoveEmotion(string name)
 	{
-		if (!emotions.Contains (emotion))
-			return;
-
-		_scrollRect.normalizedPosition -= emotion.directionalValue;
-		emotions.Remove (emotion);
+		EmotionDisplay display;
+		for(int i = 0; i < emotions.Count;i++)
+		{
+			if (emotions[i].emotion.emotionName == name)
+			{
+				display = emotions[i];
+				lerpEnd = _scrollRect.normalizedPosition - display.emotion.directionalValue;
+				Destroy(display.gameObject);
+				emotions.RemoveAt(i);
+				sliding = true;
+				break;
+			}
+		}
 	}
-
-	public List<Emotion> GetEmotions
+	
+	public bool HasEmotion(string name)
 	{
-		get{ return emotions;}
+		foreach(EmotionDisplay emotion in emotions)
+		{
+			if(emotion.name == name)
+				return true;
+		}
+
+		return false;
 	}
 }
 

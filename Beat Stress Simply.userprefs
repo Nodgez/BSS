@@ -1,14 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\ViewController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Scripts\SlidingPanel.cs">
     <Files>
-      <File FileName="Assets\Code\Scripts\MenuButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\GestureHandler.cs" Line="1" Column="1" />
-      <File FileName="Assets\ViewController.cs" Line="37" Column="31" />
-      <File FileName="Assets\Code\Scripts\AppsPanel.cs" Line="35" Column="44" />
-      <File FileName="Assets\Code\Scripts\ButtonWheel.cs" Line="77" Column="32" />
-      <File FileName="Assets\Code\Interfaces\IFade.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Scripts\ActionItem.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Scripts\Actions\Emotional Landscape\ELMenu.cs" Line="53" Column="3" />
+      <File FileName="Assets\Code\Scripts\Actions\ActionsPanel.cs" Line="32" Column="1" />
+      <File FileName="Assets\Code\Scripts\Actions\Emotional Landscape\EmotionalCollection.cs" Line="24" Column="11" />
+      <File FileName="Assets\Code\Scripts\Actions\Emotional Landscape\Graph.cs" Line="42" Column="23" />
+      <File FileName="Assets\Code\Scripts\SlidingPanel.cs" Line="7" Column="1" />
+      <File FileName="Assets\Code\MainMenuPanel.cs" Line="4" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
