@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<GraphData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <date>2015-05-26T13:19:42.3066348+01:00</date>
+  <emotions>
+    <Emotion>
+      <directionalValue>
+        <x>0.05</x>
+        <y>-0.15</y>
+      </directionalValue>
+      <emotionName>Sad</emotionName>
+    </Emotion>
+    <Emotion>
+      <directionalValue>
+        <x>0</x>
+        <y>-0.2</y>
+      </directionalValue>
+      <emotionName>Anxious</emotionName>
+    </Emotion>
+  </emotions>
+</GraphData>

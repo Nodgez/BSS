@@ -72,6 +72,7 @@
      <Compile Include="Assets\Code\Tests\ScrollRectDebug.cs" />
      <Compile Include="Assets\Code\TextDebug.cs" />
      <Compile Include="Assets\Draggable.cs" />
+     <Compile Include="Assets\FixPosition.cs" />
      <None Include="Assets\Images\Emotionl Landscape\Info.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

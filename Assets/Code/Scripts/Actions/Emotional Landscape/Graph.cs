@@ -11,11 +11,13 @@ public class Graph : MonoBehaviour {
 	private bool sliding = false;
 	private Vector2 lerpEnd;
 	private float lerpValue;
+	private GraphHistory graphHistory;
 
 	void Start () 
 	{
 		_scrollRect = GetComponent<ScrollRect> ();
 		_scrollRect.normalizedPosition = new Vector2 (0.5f, 0.5f);
+		graphHistory = new GraphHistory ("//Graph.xml");
 	}
 
 	void Update()
@@ -32,11 +34,22 @@ public class Graph : MonoBehaviour {
 			sliding = false;
 	}
 
+	void SaveCurrentEmotionalState ()
+	{
+		List<Emotion> emotionsOnDisplay = new List<Emotion> ();
+		foreach (EmotionDisplay ed in emotions)
+			emotionsOnDisplay.Add (ed.emotion);
+		GraphData data = new GraphData (emotionsOnDisplay);
+		graphHistory.Save (data);
+	}
+
 	public void AddEmotion(EmotionDisplay emotion, Vector2 direction)
 	{
 		sliding = true;
 		emotions.Add (emotion);
 		lerpEnd = _scrollRect.normalizedPosition + direction;
+
+		SaveCurrentEmotionalState ();
 	}
 
 	public void RemoveEmotion(string name)
@@ -54,6 +67,8 @@ public class Graph : MonoBehaviour {
 				break;
 			}
 		}
+
+		SaveCurrentEmotionalState ();
 	}
 	
 	public bool HasEmotion(string name)
@@ -69,10 +84,16 @@ public class Graph : MonoBehaviour {
 }
 
 [Serializable]
-public class GraphData : ScriptableObject
+public class GraphData
 {
 	public DateTime date;
 	public List<Emotion> emotions;
+
+	public GraphData()
+	{
+		this.date = DateTime.Now;
+		this.emotions = null;
+	}
 
 	public GraphData(List<Emotion> emotions)
 	{

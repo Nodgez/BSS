@@ -6,6 +6,13 @@ public class ActionsPanel : MonoBehaviour {
 
 	public GameObject[] actions;
 	private GameObject _actionInstance;
+	private SlidingPanel masterSlidingPanel;
+
+	void Start()
+	{
+//		masterSlidingPanel = GameObject.Find ("MasterMenuSlider").GetComponent<SlidingPanel> ();
+//		masterSlidingPanel.onSlideComplete += CloseAction;
+	}
 
 	public void StartAction(int actionIndex)
 	{

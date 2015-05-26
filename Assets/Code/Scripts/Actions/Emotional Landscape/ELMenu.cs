@@ -4,21 +4,25 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ELMenu : MonoBehaviour {
-
-	delegate void MenuEvent(); 
-
+	
 	public EmotionDisplay emotionDisplay;
 	public EmotionalCollection availableEmotions;
-//	public SlidingPanel positiveEmotionPanel;
-//	public SlidingPanel emergencyEmotionPanel;
 	public SlidingPanel[] slidingPanels;
 	public Graph visibleGraph;
+	public GameObject[] disabledGameObjects;
 	private Emotion selectedEmotion;
 	private List<Button> emotionButtons = new List<Button> ();
 	private List<SlidingPanel> openPanels = new List<SlidingPanel> ();
+	private GameObject masterMenuSlider;
 
 	void Start()
 	{
+		masterMenuSlider = GameObject.Find ("MasterMenuSlider");
+		if(masterMenuSlider != null)
+		{
+			SlidingPanel silder = masterMenuSlider.GetComponent<SlidingPanel> ();
+			silder.onSlideComplete += ToggleDisabledObjects;
+		}
 		Button[] tmpArray;
 		foreach (SlidingPanel panel in slidingPanels)
 		{
@@ -31,18 +35,20 @@ public class ELMenu : MonoBehaviour {
 	void Update()
 	{
 		if(Input.GetMouseButtonDown(0) && selectedEmotion != null)
-		{
-			foreach (SlidingPanel panel in openPanels)
-				panel.SlideView ();
-			AddEmotionToGraph ();
-			selectedEmotion = null;
-		}
+//		if(Input.touchCount > 0)
+//			if(Input.GetTouch(0).phase == TouchPhase.Began && selectedEmotion != null)
+			{
+				foreach (SlidingPanel panel in openPanels)
+					panel.SlideView ();
+				AddEmotionToGraph ();
+				selectedEmotion = null;
+			}
 	}
 
 	private void AddEmotionToGraph()
 	{
 		EmotionDisplay displayPrefab = Instantiate (emotionDisplay) as EmotionDisplay;
-		displayPrefab.transform.SetParent (visibleGraph.transform.GetChild(0));
+		displayPrefab.transform.SetParent (visibleGraph.transform);
 		displayPrefab.transform.localScale = Vector3.one;
 		displayPrefab.GetComponentInChildren<Text> ().text = selectedEmotion.emotionName;
 		displayPrefab.name = selectedEmotion.emotionName;
@@ -96,6 +102,19 @@ public class ELMenu : MonoBehaviour {
 
 			if (panel.IsSlid)
 				openPanels.Add (panel);
+		}
+	}
+
+	void ToggleDisabledObjects()
+	{
+		foreach(GameObject go in disabledGameObjects)
+		{
+			if(go == null)
+				continue;
+			if(go.activeSelf)
+				go.SetActive(false);
+			else
+				go.SetActive(true);
 		}
 	}
 }
