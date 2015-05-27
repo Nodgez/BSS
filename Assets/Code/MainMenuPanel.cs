@@ -4,7 +4,6 @@ using System.Collections;
 public class MainMenuPanel : SlidingPanel {
 
 	private RectTransform rectTransform;
-
 	void Start () 
 	{
 		rectTransform = transform as RectTransform;

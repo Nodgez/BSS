@@ -23,4 +23,19 @@ public sealed class MathExt {
 	{
 		return new Vector2 (vector.y, -vector.x);
 	}
+
+	public static string ReplaceChar(string str, char ch, char newChar)
+	{
+		System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder ();
+
+		for(int i = 0; i < str.Length;i++)
+		{
+			if(str[i] == ch)
+				stringBuilder.Append(newChar);
+			else
+				stringBuilder.Append(str[i]);
+		}
+
+		return stringBuilder.ToString();
+	}
 }
