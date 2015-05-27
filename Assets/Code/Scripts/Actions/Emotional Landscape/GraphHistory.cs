@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
+using System.Xml.Linq;
 using System.Collections.Generic;
 using System.Collections;
 
 public class GraphHistory {
 
-	private Dictionary<DateTime, List<EmotionDisplay>> graphs = new Dictionary<DateTime, List<EmotionDisplay>>();
+	private List<GraphData> graphData = new List<GraphData> ();
 	public string directory;
 
 	public GraphHistory(string location)
@@ -14,23 +15,6 @@ public class GraphHistory {
 		this.directory = Directory.GetCurrentDirectory () + location;
 		if (!File.Exists (directory))
 			File.Create(directory);
-	}
-
-	public void AddGraph(GraphData data)
-	{
-		if (data.date == DateTime.Now)
-			UpdateGraph (data);
-
-		//graphs.Add (data.date, data.emotions);
-	}
-
-	public void RemoveGraph()
-	{
-	}
-
-	public void UpdateGraph(GraphData data)
-	{
-		//graphs [data.date] = data.emotions;
 	}
 
 	public void Save(GraphData data)
@@ -41,21 +25,18 @@ public class GraphHistory {
 		fs.Close ();
 	}
 
-	public GraphData Load(string location)
+	public List<GraphData> Load()
 	{
-		string path = Directory.GetCurrentDirectory () + location;
-		FileStream fs = new FileStream (path,FileMode.Open);
-		XmlSerializer serializer = new XmlSerializer (typeof(GraphData));
-		GraphData data = serializer.Deserialize (fs) as GraphData;
-		return data;
-	}
-
-	public List<EmotionDisplay> GetGraphEmotions(DateTime date)
-	{
-		if(graphs.ContainsKey(date))
-			return graphs[date];
-
-		return null;
-
+		List<GraphData> allGraphs = new List<GraphData> ();
+		string[] files = Directory.GetFiles (Directory.GetCurrentDirectory (), "*.XML");
+		for(int i = 0; i < files.Length;i++)
+		{
+			string path = files[i];
+			FileStream fs = new FileStream (path,FileMode.Open);
+			XmlSerializer serializer = new XmlSerializer (typeof(GraphData));
+			GraphData data = serializer.Deserialize (fs) as GraphData;
+			allGraphs.Add(data);
+		}
+		return allGraphs;
 	}
 }

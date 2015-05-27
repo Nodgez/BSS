@@ -7,6 +7,11 @@ public class ButtonLayout : MonoBehaviour {
 	public MenuButton[] buttons;
 	protected ButtonPoint[] buttonPoints;
 
+	protected virtual void Start()
+	{
+		buttonPoints = new ButtonPoint[buttons.Length];
+	}
+
 	protected virtual void Update () 
 	{
 		//checks for a finised swipe event

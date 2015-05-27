@@ -9,9 +9,9 @@ public class SelectionCurve : ButtonLayout {
 	private Vector3 _curveMiddle;
 	private Vector3 _curveEnd;
 
-	void Start () 
+	protected override void Start () 
 	{
-		buttonPoints = new ButtonPoint[buttons.Length];
+		base.Start ();
 		_curveStart = new Vector3 (Screen.width * 0.1f, Screen.height * 0.6f, 10);
 		_curveStart = Camera.main.ScreenToWorldPoint(_curveStart);
 

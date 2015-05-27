@@ -21,12 +21,6 @@ public class Graph : MonoBehaviour {
 
 	void Update()
 	{
-		if(Input.GetButtonDown("Jump"))
-		{
-			string date = MathExt.ReplaceChar(DateTime.Now.ToShortDateString(),'/','-');
-			GraphData data = graphHistory.Load("//Graph " + date + ".xml");
-			Debug.Log(data.date.ToLongDateString());
-		}
 		lerpValue += Time.deltaTime;
 		if (!sliding)
 		{

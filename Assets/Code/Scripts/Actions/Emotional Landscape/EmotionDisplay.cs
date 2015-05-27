@@ -7,10 +7,9 @@ public class EmotionDisplay : MonoBehaviour {
 
 	public Button button;
 	public Emotion emotion;
-	ELMenu menu;
-	UnityAction buttonAction;
+	private ELMenu menu;
+	private UnityAction buttonAction;
 
-	// Use this for initialization
 	void Start () 
 	{
 		menu = GameObject.Find ("ELMenu").GetComponent<ELMenu> ();

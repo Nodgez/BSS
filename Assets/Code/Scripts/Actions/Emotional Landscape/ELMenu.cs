@@ -7,6 +7,8 @@ using System.Collections.Generic;
 public class ELMenu : MonoBehaviour {
 	
 	public EmotionDisplay emotionDisplay;
+	public HistoryButtonLayout historyDisplay;
+	public MenuButton historyButton;
 	public EmotionalCollection availableEmotions;
 	public SlidingPanel[] slidingPanels;
 	public Graph visibleGraph;
@@ -15,6 +17,8 @@ public class ELMenu : MonoBehaviour {
 	private List<Button> emotionButtons = new List<Button> ();
 	private List<SlidingPanel> openPanels = new List<SlidingPanel> ();
 	private GraphHistory graphHistory;
+
+	public List<GraphData> graphData;
 
 	void Start()
 	{
@@ -48,6 +52,11 @@ public class ELMenu : MonoBehaviour {
 				AddEmotionToGraph ();
 				selectedEmotion = null;
 			}
+
+		if(Input.GetButtonDown("Jump"))
+		{
+			OpenHistory();
+		}
 	}
 
 	private void AddEmotionToGraph()
@@ -89,13 +98,12 @@ public class ELMenu : MonoBehaviour {
 		CloseOpenPanels ();
 	}
 
-	public void CloseOpenPanels()
+	public void OpenHistory()
 	{
-		foreach (SlidingPanel panel in slidingPanels)
-		{
-			if(panel.IsSlid)
-				panel.SlideView();
-		}
+		graphData = graphHistory.Load();
+		HistoryButtonLayout layout = Instantiate(historyDisplay) as HistoryButtonLayout;
+		layout.transform.SetParent(this.transform);
+		layout.transform.localScale = Vector3.one;
 	}
 
 	void SaveCurrentEmotionalState ()
@@ -105,6 +113,15 @@ public class ELMenu : MonoBehaviour {
 			emotionsOnDisplay.Add (ed.emotion);
 		GraphData data = new GraphData (emotionsOnDisplay);
 		graphHistory.Save (data);
+	}
+
+	public void CloseOpenPanels()
+	{
+		foreach (SlidingPanel panel in slidingPanels)
+		{
+			if(panel.IsSlid)
+				panel.SlideView();
+		}
 	}
 
 	void SaveScreenState()
