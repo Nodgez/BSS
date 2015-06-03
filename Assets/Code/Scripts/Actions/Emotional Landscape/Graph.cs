@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections;
@@ -24,6 +24,7 @@ public class Graph : MonoBehaviour {
 		lerpValue += Time.deltaTime;
 		if (!sliding)
 		{
+			_scrollRect.normalizedPosition = Reposition ();
 			lerpValue = 0;
 			return;
 		}
@@ -33,16 +34,11 @@ public class Graph : MonoBehaviour {
 			sliding = false;
 	}
 
-//	public void AddEmotion(EmotionDisplay emotion)
-//	{
-//		emotions.Add (emotion);
-//	}
-
 	public void AddEmotion(EmotionDisplay emotion)
 	{
 		sliding = true;
 		emotions.Add (emotion);
-		RePosition ();
+		lerpEnd = Reposition ();
 	}
 
 	public void RemoveEmotion(string name)
@@ -53,14 +49,13 @@ public class Graph : MonoBehaviour {
 			if (emotions[i].emotion.emotionName == name)
 			{
 				display = emotions[i];
-				lerpEnd = _scrollRect.normalizedPosition - display.emotion.directionalValue;
 				Destroy(display.gameObject);
 				emotions.RemoveAt(i);
 				sliding = true;
 				break;
 			}
 		}
-		RePosition ();
+		lerpEnd = Reposition ();
 	}
 
 	public void ResetGraph()
@@ -80,26 +75,25 @@ public class Graph : MonoBehaviour {
 		emotions.Clear ();
 	}
 
-	void RePosition()
+	Vector2 Reposition()
 	{
 		Vector2 collectiveDirection = Vector2.zero;
 		foreach (EmotionDisplay emo in emotions) {
-			Vector3 worldToScreen = Camera.main.WorldToScreenPoint (emo.transform.position);//get position on screen
-			Vector2 screenTop = new Vector2 (Screen.width * 0.5f, 0);						//get top as max distance
-			Vector2 emoScreenPoint = new Vector2 (worldToScreen.x, worldToScreen.y);		//convert emotion pos to vector2
-			Vector2 screenCenter = new Vector2 (Screen.width * 0.5f, Screen.height * 0.5f);	//set the screen center
+			Vector3 worldToViewport = Camera.main.WorldToViewportPoint (emo.transform.position);//get position on screen
+			Vector2 screenTop = new Vector2 (0.5f, 0);						//get top as max distance
+			Vector2 emoScreenPoint = new Vector2 (worldToViewport.x, worldToViewport.y);		//convert emotion pos to vector2
+			Vector2 screenCenter = new Vector2 (0.5f, 0.5f);									//set the screen center
 			float maxEmotionWeight = Vector2.Distance (screenTop, screenCenter);			//get the longest distance allowed
 			Vector2 direction = emoScreenPoint - screenCenter;								//get the direction from center to emotion
 			float emotionWeight = Vector2.Distance (emoScreenPoint, screenCenter);			//get distance from emotion to center	
-			emotionWeight /= maxEmotionWeight;												//percentage
-			emotionWeight = 1 - emotionWeight;
-			collectiveDirection += direction;
-			Debug.DrawRay(emo.transform.position,direction.normalized,Color.red, 10.0f);
+			emotionWeight = Mathf.Clamp(maxEmotionWeight - emotionWeight, 0.01f , maxEmotionWeight) * 0.5f;
+			collectiveDirection += direction.normalized * emotionWeight;
+			Debug.DrawRay(emo.transform.position,direction.normalized,Color.red, 1.0f);
 		}
-		if (emotions.Count > 0)
-			lerpEnd = _scrollRect.normalizedPosition + (collectiveDirection.normalized * 0.2f);
+		if(emotions.Count > 0)
+			return new Vector2(0.5f,0.5f) + collectiveDirection;
 		else
-			lerpEnd = new Vector2 (0.5f, 0.5f);
+			return new Vector2 (0.5f, 0.5f);
 	}
 	
 	public bool HasEmotion(string name)

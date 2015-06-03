@@ -32,7 +32,7 @@ public class GraphHistory {
 			GraphData testData = graphData[i];
 			//needs to be changed to test D-M-Y
 			//if the data for a day alrady exists then swap it out
-			if(testData.date.Day == data.date.Day)
+			if(testData.date == DateTime.Today)
 				graphData[i] = data;
 		}
 		//If the data isn't recorded then record it

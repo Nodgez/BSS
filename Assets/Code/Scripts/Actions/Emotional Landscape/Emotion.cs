@@ -9,8 +9,19 @@ public enum EmotionType
 [System.Serializable]
 public class Emotion 
 {
-	public Vector2 directionalValue;
+	[HideInInspector]
 	public Vector3 position;
 	public EmotionType emotionType;
 	public string emotionName;
+
+	public Emotion()
+	{
+	}
+
+	public Emotion(Vector3 position, EmotionType emotionType, string emotionName)
+	{
+		this.position = position;
+		this.emotionName = emotionName;
+		this.emotionType = emotionType;
+	}
 }

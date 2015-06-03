@@ -12,12 +12,13 @@ public class ELMenu : Menu {
 	public SlidingPanel[] emotionsPanels;
 	public EmotionalCollection availableEmotions;
 	public Graph visibleGraph;
+	public List<GraphData> graphCollection;
+	public GameObject addEmotionForm;
 	private Emotion selectedEmotion;
 	private List<Button> emotionButtons = new List<Button> ();
 	private GraphHistory graphHistory;
 	private DateTime dateOnDisplay;
 	private HistoryButtonLayout historyLayoutInstance;
-	public List<GraphData> graphCollection;
 
 	protected override void Start()
 	{
@@ -36,7 +37,6 @@ public class ELMenu : Menu {
 		if(!hasDataForToday){
 			GraphData data = new GraphData(new List<Emotion>(), Vector2.one * 0.5f);
 			graphHistory.Save(data);
-			graphCollection = graphHistory.Load();
 		}
 
 		//Find the Main sliding panel that slide from main menu to the Skill
@@ -115,6 +115,30 @@ public class ELMenu : Menu {
 		SaveCurrentEmotionalState ();
 	}
 
+	public void AddEmotionToGraph(Emotion newEmotion)
+	{
+		if (dateOnDisplay != DateTime.Today)
+			return;
+		EmotionDisplay displayPrefab = Instantiate (emotionDisplay) as EmotionDisplay;
+		displayPrefab.transform.SetParent (visibleGraph.transform);
+		displayPrefab.transform.localScale = Vector3.one;
+		displayPrefab.GetComponentInChildren<Text> ().text = newEmotion.emotionName;
+		displayPrefab.name = newEmotion.emotionName;
+		displayPrefab.emotion = newEmotion;
+		Vector3 position = newEmotion.position;// Input.mousePosition;//GetTouch(0).position;
+		
+		displayPrefab.transform.position = new Vector3 (position.x,
+		                                                position.y,
+		                                                0);
+		visibleGraph.AddEmotion (displayPrefab);
+		
+		foreach (Button b in emotionButtons)
+			if (b.gameObject.name == newEmotion.emotionName)
+				b.interactable = false;
+		
+		SaveCurrentEmotionalState ();
+	}
+
 	private void AddSavedEmotionToGraph(Emotion newEmotion)
 	{
 		EmotionDisplay displayPrefab = Instantiate (emotionDisplay) as EmotionDisplay;
@@ -134,7 +158,7 @@ public class ELMenu : Menu {
 			if (b.gameObject.name == newEmotion.emotionName)
 				b.interactable = false;
 		
-		SaveCurrentEmotionalState ();
+		//SaveCurrentEmotionalState ();
 	}
 
 	public void RemoveEmotionFromGraph(string name)
@@ -159,6 +183,8 @@ public class ELMenu : Menu {
 
 	public void OpenHistory()
 	{
+		if (historyLayoutInstance)
+			return;
 		historyLayoutInstance = Instantiate(historyDisplay) as HistoryButtonLayout;
 		historyLayoutInstance.gameObject.SetActive (true);
 		historyLayoutInstance.transform.SetParent(this.transform);
@@ -170,14 +196,8 @@ public class ELMenu : Menu {
 
 	public void SwapGraphInfo(DateTime date)
 	{
-		//if the date we want is already on show then ignore
-		if (date == dateOnDisplay)
-		{
-			if(historyLayoutInstance)
-				Destroy(historyLayoutInstance.gameObject);
-			return;
-		}
-		dateOnDisplay = DateTime.Today;
+		if(date != DateTime.Today)
+			graphCollection = graphHistory.Load ();
 		foreach(GraphData gd in graphCollection)
 		{
 			//if the date we want isn't this data's date move to next piece of data
@@ -196,12 +216,19 @@ public class ELMenu : Menu {
 		}
 	}
 
-	void SaveCurrentEmotionalState ()
+	public void SaveCurrentEmotionalState ()
 	{
 		List<Emotion> emotionsOnDisplay = new List<Emotion> ();
 		foreach (EmotionDisplay ed in visibleGraph.GetDisplayedEmotions)
 			emotionsOnDisplay.Add (ed.emotion);
 		GraphData data = new GraphData (emotionsOnDisplay, visibleGraph.ShiftedPosition);
 		graphHistory.Save (data);
+	}
+
+	public void AddEmotionToList()
+	{
+		GameObject form = Instantiate (addEmotionForm) as GameObject;
+		form.transform.SetParent (this.transform);
+		form.transform.localScale = Vector3.one;
 	}
 }

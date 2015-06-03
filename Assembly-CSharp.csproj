@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AddEmotionForm.cs" />
      <Compile Include="Assets\Code\Interfaces\IFade.cs" />
      <Compile Include="Assets\Code\Interfaces\ISlidable.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\ActionsPanel.cs" />
@@ -74,6 +75,7 @@
      <Compile Include="Assets\Code\Tests\RenderScripts.cs" />
      <Compile Include="Assets\Code\Tests\ScrollRectDebug.cs" />
      <Compile Include="Assets\Draggable.cs" />
+     <Compile Include="Assets\EmotionsButtonList.cs" />
      <Compile Include="Assets\FixPosition.cs" />
      <None Include="Assets\Images\Emotionl Landscape\Info.txt" />
  <Reference Include="UnityEngine.UI">

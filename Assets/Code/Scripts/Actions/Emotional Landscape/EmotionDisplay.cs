@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
 
-public class EmotionDisplay : MonoBehaviour,IDragHandler {
+public class EmotionDisplay : MonoBehaviour,IDragHandler, IEndDragHandler {
 
 	public Button button;
 	public Emotion emotion;
@@ -14,6 +14,7 @@ public class EmotionDisplay : MonoBehaviour,IDragHandler {
 	private RectTransform rectTransform;
 	private RectTransform canvasRectTransform;
 	private Vector2 pointerOffset;
+	private Vector3 screenPos;
 
 	void Start () 
 	{
@@ -47,13 +48,30 @@ public class EmotionDisplay : MonoBehaviour,IDragHandler {
 			return;
 
 		//Vector2 pointerPostion = ClampToWindow (data);
-		
+		Vector3 screenCenter = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width * 0.5f,
+		                                                                   Screen.height * 0.5f,
+		                                                                   10));
 		Vector2 localPointerPosition;
 		if (RectTransformUtility.ScreenPointToLocalPointInRectangle (
 			canvasRectTransform, data.position, data.pressEventCamera, out localPointerPosition
 		)) {
+			if(emotion.emotionType == EmotionType.Emergency){
+				if(localPointerPosition.x < 0)
+					localPointerPosition = new Vector2(0,localPointerPosition.y);
+			}
+			else if(emotion.emotionType == EmotionType.Positive){
+				if(localPointerPosition.x > 0)
+					localPointerPosition = new Vector2(0,localPointerPosition.y);
+			}
 			rectTransform.localPosition = localPointerPosition - pointerOffset;
+			emotion.position = transform.position;
 		}
+	}
+
+	public void OnEndDrag(PointerEventData data)
+	{
+		ELMenu elMenu = GameObject.Find ("ELMenu").GetComponent<ELMenu> ();
+		elMenu.SaveCurrentEmotionalState ();
 	}
 
 	Vector2 ClampToWindow (PointerEventData data) {
