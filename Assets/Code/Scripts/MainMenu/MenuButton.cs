@@ -13,10 +13,12 @@ public class MenuButton : MonoBehaviour{
 	private float _interpPercent = 1;
 	private Image _image;				//the button Image
 	private float interpSpeed = 5;
-	private bool _interactable;
+	public bool _interactable;
 	private Button _button;
 
 	public bool interpComplete = true;	//Used to check if all butons have finished interpolating
+	public Vector2 smallResSize = new Vector2(256,256);
+	public Vector2 largeResSize =new Vector2(364, 364);
 
 	void Start () 
 	{
@@ -26,9 +28,9 @@ public class MenuButton : MonoBehaviour{
 		_image = GetComponent<Image> ();
 		int width = Screen.width;
 		if(width < 1280)
-			buttonTransform.sizeDelta = new Vector2(256,256);
+			buttonTransform.sizeDelta = smallResSize;
 		else
-			buttonTransform.sizeDelta = new Vector2(384,384);
+			buttonTransform.sizeDelta = largeResSize;
 	}
 
 	void Update () 

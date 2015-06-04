@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 
-public class SelectionCurve : ButtonLayout {
+public class CurveLayout : ButtonLayout {
 
 	private Vector3 _curveStart;
 	private Vector3 _curveMiddle;
@@ -37,7 +37,10 @@ public class SelectionCurve : ButtonLayout {
 		while(index < numberOfButtons)
 		{
 			if(index == halfway)
+			{
 				buttonPoints[index].interactable = true;
+				buttons[index]._interactable = true;
+			}
 			Vector3 pos = MathExt.Qerp(interpValue,
 			                   _curveStart,
 			                   _curveMiddle,

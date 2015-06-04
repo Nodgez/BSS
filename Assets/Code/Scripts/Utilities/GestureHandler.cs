@@ -13,6 +13,8 @@ public enum GestureState
 public enum SwipeDirection {
 	Left = -1,
 	Right = 1,
+	Up = -1,
+	Down = 1,
 	None = 0
 }
 
@@ -162,10 +164,21 @@ public class GestureHandler : MonoBehaviour
 	{
 		get
 		{
-			if(touchDelta.x > 0)
-				return SwipeDirection.Right;
-			else if(touchDelta.x < 0)
-				return SwipeDirection.Left;
+//			if(touchDelta.x > touchDelta.y)
+//			{
+				if(touchDelta.x > 0)
+					return SwipeDirection.Right;
+				else if(touchDelta.x < 0)
+					return SwipeDirection.Left;
+			//}
+
+//			else if(touchDelta.x < touchDelta.y)
+//			{
+//				if(touchDelta.y > 0)
+//					return SwipeDirection.Up;
+//				else if(touchDelta.y < 0)
+//					return SwipeDirection.Down;
+//			}
 
 			return SwipeDirection.None;
 		}

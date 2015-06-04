@@ -7,8 +7,11 @@ public class SlidingPanel : MonoBehaviour {
 	public delegate void OnSlideComplete ();
 	public event OnSlideComplete onSlideComplete;
 
-	public delegate void OnSlideBegan ();
-	public event OnSlideComplete onSlideBegan;
+	public delegate void OnSlideTo();
+	public event OnSlideTo onSlideTo;
+
+	public delegate void OnSlideBack();
+	public event OnSlideTo onSlideBack;
 
 	public Scrollbar controllingSlider;
 	public bool sliding = false;

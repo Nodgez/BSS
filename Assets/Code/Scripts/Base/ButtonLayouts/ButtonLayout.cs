@@ -64,11 +64,15 @@ public struct ButtonPoint
 	public int siblingIndex;
 	public bool interactable;
 	
-	public void FindScale(float min, float max)
+	public void FindScale(float min, float max, bool xRelative = true)
 	{
 		float difference = max - min;
-		float percent = difference * 0.01f;
-		float scalar = Mathf.Abs((position.x - min) / percent);
+		float percent = difference * 0.01f == 0  ? 1 : difference * 0.01f;
+		float scalar = 0;
+		if (xRelative)
+			scalar = Mathf.Abs ((position.x - min) / percent);
+		else
+			scalar = Mathf.Abs ((position.y - min) / percent);
 		scalar *= 0.01f; // normalize it
 		scalar = 1.0f - scalar;
 		opacity = scalar;

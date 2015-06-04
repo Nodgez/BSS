@@ -5,16 +5,16 @@ using System.Collections;
 public class Menu : MonoBehaviour {
 
 	public GameObject[] disabledGameObjects;
-	private List<SlidingPanel> openPanels = new List<SlidingPanel> ();
+	protected List<SlidingPanel> openPanels = new List<SlidingPanel> ();
 	public SlidingPanel[] slidingPanels;
 
 	// Use this for initialization
-	void Start () {
+	protected virtual void Start () {
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected virtual void Update () {
 	
 	}
 
@@ -27,7 +27,7 @@ public class Menu : MonoBehaviour {
 		}
 	}
 
-	void SaveScreenState()
+	protected void SaveScreenState()
 	{
 		foreach (SlidingPanel panel in slidingPanels)
 		{
@@ -43,7 +43,7 @@ public class Menu : MonoBehaviour {
 		}
 	}
 
-	void ToggleDisabledObjects()
+	protected void ToggleDisabledObjects()
 	{
 		foreach(GameObject go in disabledGameObjects)
 		{

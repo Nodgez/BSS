@@ -11,6 +11,9 @@ public class ScrollPanel : MonoBehaviour {
 	void Start () 
 	{
 		startingPosition = transform.position;
+		endPosition = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width * endPosition.x,
+		                                                          Screen.height * endPosition.y,
+		                                                          10));
 	}
 
 	void Update () 

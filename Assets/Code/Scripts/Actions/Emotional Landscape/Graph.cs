@@ -33,12 +33,16 @@ public class Graph : MonoBehaviour {
 			sliding = false;
 	}
 
+//	public void AddEmotion(EmotionDisplay emotion)
+//	{
+//		emotions.Add (emotion);
+//	}
 
-	public void AddEmotion(EmotionDisplay emotion, Vector2 direction)
+	public void AddEmotion(EmotionDisplay emotion)
 	{
 		sliding = true;
 		emotions.Add (emotion);
-		lerpEnd = _scrollRect.normalizedPosition + direction;
+		RePosition ();
 	}
 
 	public void RemoveEmotion(string name)
@@ -56,6 +60,46 @@ public class Graph : MonoBehaviour {
 				break;
 			}
 		}
+		RePosition ();
+	}
+
+	public void ResetGraph()
+	{
+		ClearAllEmotions ();
+		_scrollRect.normalizedPosition = new Vector2 (0.5f, 0.5f);
+	}
+
+	public void ClearAllEmotions()
+	{
+		for(int i = 0; i < emotions.Count;i++)
+		{
+			EmotionDisplay display = emotions[i];
+			Destroy(display.gameObject);
+		}
+
+		emotions.Clear ();
+	}
+
+	void RePosition()
+	{
+		Vector2 collectiveDirection = Vector2.zero;
+		foreach (EmotionDisplay emo in emotions) {
+			Vector3 worldToScreen = Camera.main.WorldToScreenPoint (emo.transform.position);//get position on screen
+			Vector2 screenTop = new Vector2 (Screen.width * 0.5f, 0);						//get top as max distance
+			Vector2 emoScreenPoint = new Vector2 (worldToScreen.x, worldToScreen.y);		//convert emotion pos to vector2
+			Vector2 screenCenter = new Vector2 (Screen.width * 0.5f, Screen.height * 0.5f);	//set the screen center
+			float maxEmotionWeight = Vector2.Distance (screenTop, screenCenter);			//get the longest distance allowed
+			Vector2 direction = emoScreenPoint - screenCenter;								//get the direction from center to emotion
+			float emotionWeight = Vector2.Distance (emoScreenPoint, screenCenter);			//get distance from emotion to center	
+			emotionWeight /= maxEmotionWeight;												//percentage
+			emotionWeight = 1 - emotionWeight;
+			collectiveDirection += direction;
+			Debug.DrawRay(emo.transform.position,direction.normalized,Color.red, 10.0f);
+		}
+		if (emotions.Count > 0)
+			lerpEnd = _scrollRect.normalizedPosition + (collectiveDirection.normalized * 0.2f);
+		else
+			lerpEnd = new Vector2 (0.5f, 0.5f);
 	}
 	
 	public bool HasEmotion(string name)
@@ -76,6 +120,12 @@ public class Graph : MonoBehaviour {
 			return emotions;
 		}
 	}
+
+	public Vector2 ShiftedPosition
+	{
+		get{return _scrollRect.normalizedPosition;}
+		set{ _scrollRect.normalizedPosition = value;}
+	}
 }
 
 [Serializable]
@@ -83,16 +133,19 @@ public class GraphData
 {
 	public DateTime date;
 	public List<Emotion> emotions;
+	public Vector2 normailzedGraphPosition;
 
 	public GraphData()
 	{
-		this.date = DateTime.Now;
+		this.date = DateTime.Today;
 		this.emotions = null;
+		this.normailzedGraphPosition = new Vector2 (0.5f, 0.5f);
 	}
 
-	public GraphData(List<Emotion> emotions)
+	public GraphData(List<Emotion> emotions, Vector2 normailzedGraphPosition)
 	{
-		this.date = DateTime.Now;
+		this.date = DateTime.Today;
 		this.emotions = emotions;
+		this.normailzedGraphPosition = normailzedGraphPosition;
 	}
 }

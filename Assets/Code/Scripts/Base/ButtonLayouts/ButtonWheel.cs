@@ -8,13 +8,15 @@ public class ButtonWheel : ButtonLayout {
 	
 	private Vector3 _center;
 
-	void Start () 
+	protected override void Start () 
 	{
 		buttonPoints = new ButtonPoint[buttons.Length];
 		_center = Vector3.zero;
 		SetUpWheel (_center, 2);
 		RectTransform trans = transform as RectTransform;
 		trans.offsetMin = new Vector2 (0, Screen.height * 0.5f);
+
+		base.Start ();
 	}
 
 	protected override void Update () 
@@ -57,7 +59,7 @@ public class ButtonWheel : ButtonLayout {
 
 		for(int o = 0; o < buttonPoints.Length;o++)
 		{
-			buttonPoints[o].FindScale(buttonPoints[0].position.y, yMax);
+			buttonPoints[o].FindScale(buttonPoints[0].position.y, yMax, true);
 		}
 
 		for(int j = 0; j < buttons.Length;j++)
