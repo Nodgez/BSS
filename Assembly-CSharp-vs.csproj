@@ -46,14 +46,18 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AddEmotionForm.cs" />
      <Compile Include="Assets\Code\Interfaces\IFade.cs" />
      <Compile Include="Assets\Code\Interfaces\ISlidable.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\ActionsPanel.cs" />
+     <Compile Include="Assets\Code\Scripts\Actions\Breath Pacer\BreathPacerSettingsForm.cs" />
+     <Compile Include="Assets\Code\Scripts\Actions\Breath Pacer\ButterFlyAnimation.cs" />
+     <Compile Include="Assets\Code\Scripts\Actions\Breath Pacer\ButterflyController.cs" />
+     <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\AddEmotionForm.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\ELMenu.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\Emotion.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\EmotionDisplay.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\EmotionalCollection.cs" />
+     <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\EmotionsButtonList.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\Graph.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\GraphHistory.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\HistoryButtonLayout.cs" />
@@ -63,7 +67,6 @@
      <Compile Include="Assets\Code\Scripts\Base\ButtonLayouts\LineLayout.cs" />
      <Compile Include="Assets\Code\Scripts\Base\Menu.cs" />
      <Compile Include="Assets\Code\Scripts\Base\SlidingPanel.cs" />
-     <Compile Include="Assets\Code\Scripts\BeatController.cs" />
      <Compile Include="Assets\Code\Scripts\MainMenu\MainMenuPanel.cs" />
      <Compile Include="Assets\Code\Scripts\MainMenu\MenuButton.cs" />
      <Compile Include="Assets\Code\Scripts\MainMenu\MenuText.cs" />
@@ -75,8 +78,9 @@
      <Compile Include="Assets\Code\Tests\RenderScripts.cs" />
      <Compile Include="Assets\Code\Tests\ScrollRectDebug.cs" />
      <Compile Include="Assets\Draggable.cs" />
-     <Compile Include="Assets\EmotionsButtonList.cs" />
      <Compile Include="Assets\FixPosition.cs" />
+     <Compile Include="Assets\TimedObject.cs" />
+     <None Include="Assets\Images\Breath Pacer\Info.txt" />
      <None Include="Assets\Images\Emotionl Landscape\Info.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

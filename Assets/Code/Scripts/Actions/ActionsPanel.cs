@@ -10,8 +10,8 @@ public class ActionsPanel : MonoBehaviour {
 
 	void Start()
 	{
-//		masterSlidingPanel = GameObject.Find ("MasterMenuSlider").GetComponent<SlidingPanel> ();
-//		masterSlidingPanel.onSlideComplete += CloseAction;
+		//masterSlidingPanel = GameObject.Find ("MasterMenuSlider").GetComponent<SlidingPanel> ();
+		///masterSlidingPanel.onSlideBack += CloseAction;
 	}
 
 	public void StartAction(int actionIndex)

@@ -9,10 +9,10 @@ public class LineLayout : ButtonLayout {
 
 	protected override void Start ()
 	{
-		endOfLine = new Vector3 (Screen.width * 0.5f, Screen.height * 0.6f, 10);
+		endOfLine = new Vector3 (Screen.width * 0.5f, Screen.height * 0.8f, 10);
 		endOfLine = Camera.main.ScreenToWorldPoint(endOfLine);
 		
-		frontOfLine = new Vector3 (Screen.width * 0.5f, Screen.height * 0.45f, 10);
+		frontOfLine = new Vector3 (Screen.width * 0.5f, Screen.height * 0.5f, 10);
 		frontOfLine = Camera.main.ScreenToWorldPoint(frontOfLine);
 
 		base.Start ();
@@ -30,7 +30,7 @@ public class LineLayout : ButtonLayout {
 		int index = 0;
 		int numberOfButtons = buttons.Length;
 		
-		buttons[0]._interactable = true;
+		buttons[numberOfButtons - 1]._interactable = true;
 		while(index < numberOfButtons)
 		{
 			Vector3 pos = Vector3.Lerp(frontOfLine,endOfLine,interpValue);
@@ -40,15 +40,16 @@ public class LineLayout : ButtonLayout {
 			index ++;
 		}
 		buttonPoints [0].interactable = true;
-		for (int j = 0; j < buttonPoints.Length;j++)
+		for (int j = 0; j < numberOfButtons;j++)
 			buttonPoints[j].FindScale (buttonPoints [0].position.y, buttonPoints [buttonPoints.Length - 1].position.y,false);
 		
-		for(int i = 0; i < buttons.Length; i++)
+		for(int i = 0; i < numberOfButtons; i++)
 		{
-			buttons[i].transform.position = buttonPoints[i].position + transform.position;
-			buttons[i].transform.localScale = buttonPoints[i].scale;
-			buttons[i].transform.SetSiblingIndex(buttonPoints[i].siblingIndex);
-			buttons[i].GetComponent<Button>().image.color = new Color(1,1,1,buttonPoints[i].opacity);
+			int bpIndex = (numberOfButtons - 1) - i;
+			buttons[i].transform.position = buttonPoints[bpIndex].position + transform.position;
+			buttons[i].transform.localScale = buttonPoints[bpIndex].scale;
+			buttons[i].transform.SetSiblingIndex(buttonPoints[bpIndex].siblingIndex);
+			buttons[i].GetComponent<Button>().image.color = new Color(1,1,1,buttonPoints[bpIndex].opacity);
 		}
 	}
 }

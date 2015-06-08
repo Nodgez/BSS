@@ -1,0 +1,45 @@
+Breath Pacer Setup
+
+Breath Pacer 1 Setup Image: 
+
+Instruction box will appear first time. Notice that we have got
+rid of the arrow GUI's. Now it is just a menu button and settings button but you can swipe across screen to go to next skill instead. You can delete the arrow buttons from the Emotional Landscape too. Won't need them anymore. Sorry about this, they just didn't look right.
+
+BreathPacerAnimationSetup: 
+
+Once you touch the solo butterfly image
+the sprite sheet begins. Not sure if it should begin with full spread wings or in distance fluttered wings. Maybe it should should start with closed wings so you breath 
+it in towards you. Notice how all the GUI on screen disappears so
+it is just you and the butterfly animation. 
+
+
+BreathPacerMenu Setup: Menu box should slide into screen, this is what David wants.
+
+Butterfly Sprite sheet:
+
+This is made up 64 sprites at 512 x 512 each spritebox to retain quality. 
+Before you touch the butterfly to start the animation there is a solo image of butterfly
+which is in this folder too. We can't use the first sprite image to be there before the animation as
+it only looks good glowing when animated.
+The 64 sprite images is just one motion which you need to put in reverse after it reaches last sprite
+eg 1-64, 64-1 loop. It was too big a sprite sheet to make it go reverse as well on my side.
+
+Instruction box 2: comes up after the breathing only the first time using app. There is
+also a swipe icon if you want to throw that in under the instruction box if you like.
+
+Sliderbox1: for numbers after slidebars.
+
+Sliderbox2: is a bit longer for ratio of inhale and exhale.
+
+You can just keep resorting back to setup images to see where everything goes and to keep
+them in correct positions :)
+
+Fair play for putting all these different skill screens together, its a lot of different GUI and 
+assets like a load of mini apps in one. Must be tricky enough.. :p
+
+
+
+
+
+
+

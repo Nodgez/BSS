@@ -45,8 +45,8 @@ public class ELMenu : Menu {
 		{
 			//Get the slding event and add toggle  scrips to trigger on it's completion
 			SlidingPanel silder = masterMenuSlider.GetComponent<SlidingPanel> ();
-			silder.onSlideComplete += ToggleDisabledObjects;
-			silder.onSlideComplete += delegate {
+			silder.onSlideTo += ToggleDisabledObjects;
+			silder.onSlideTo += delegate {
 				//If data exists for today then load it
 				SwapGraphInfo (DateTime.Today);
 			};
@@ -85,7 +85,7 @@ public class ELMenu : Menu {
 
 	private void AddEmotionToGraph()
 	{
-		if (dateOnDisplay != DateTime.Today)
+		if (dateOnDisplay != DateTime.Today || visibleGraph.GetDisplayedEmotions.Count >= 5)
 			return;
 		EmotionDisplay displayPrefab = Instantiate (emotionDisplay) as EmotionDisplay;
 		displayPrefab.transform.SetParent (visibleGraph.transform);
@@ -141,6 +141,9 @@ public class ELMenu : Menu {
 
 	private void AddSavedEmotionToGraph(Emotion newEmotion)
 	{
+		if (visibleGraph.GetDisplayedEmotions.Count >= 5)
+			return;
+
 		EmotionDisplay displayPrefab = Instantiate (emotionDisplay) as EmotionDisplay;
 		displayPrefab.transform.SetParent (visibleGraph.transform);
 		displayPrefab.transform.localScale = Vector3.one;
@@ -196,8 +199,9 @@ public class ELMenu : Menu {
 
 	public void SwapGraphInfo(DateTime date)
 	{
-		if(date != DateTime.Today)
-			graphCollection = graphHistory.Load ();
+		if (visibleGraph == null)
+			return;
+		graphCollection = graphHistory.Load ();
 		foreach(GraphData gd in graphCollection)
 		{
 			//if the date we want isn't this data's date move to next piece of data
@@ -227,6 +231,8 @@ public class ELMenu : Menu {
 
 	public void AddEmotionToList()
 	{
+		if (visibleGraph.GetDisplayedEmotions.Count >= 5)
+			return;
 		GameObject form = Instantiate (addEmotionForm) as GameObject;
 		form.transform.SetParent (this.transform);
 		form.transform.localScale = Vector3.one;

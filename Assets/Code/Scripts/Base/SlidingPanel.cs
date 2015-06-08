@@ -32,6 +32,22 @@ public class SlidingPanel : MonoBehaviour {
 				controllingSlider.value = Mathf.Round(value);
 				sliding = false;
 			}
+
+			if(value >= 1)
+			{
+				if(onSlideTo != null)
+					onSlideTo();
+				controllingSlider.value = Mathf.Round(value);
+				sliding = false;
+			}
+
+			if(value <= 0)
+			{
+				if(onSlideBack != null)
+					onSlideBack();
+				controllingSlider.value = Mathf.Round(value);
+				sliding = false;
+			}
 		}
 	}
 

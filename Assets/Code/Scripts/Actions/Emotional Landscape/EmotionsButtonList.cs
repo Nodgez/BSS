@@ -24,6 +24,7 @@ public class EmotionsButtonList : MonoBehaviour {
 		}
 		emotionsToStore.Sort ((x, y) => string.Compare (x.emotionName, y.emotionName));
 		float heightOfContainer = emotionsToStore.Count * 50;
+		rectTrans.offsetMax = new Vector2 (rectTrans.offsetMax.x, -30);
 		rectTrans.offsetMin = new Vector2 (rectTrans.offsetMin.x, -heightOfContainer);
 		for (int i = 0; i < emotionsToStore.Count; i++) {
 			//create button and add event

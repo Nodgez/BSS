@@ -17,6 +17,9 @@ public class Graph : MonoBehaviour {
 	{
 		_scrollRect = GetComponent<ScrollRect> ();
 		_scrollRect.normalizedPosition = new Vector2 (0.5f, 0.5f);
+
+//		SlidingPanel masterSlidingPanel = GameObject.Find ("MasterMenuSlider").GetComponent<SlidingPanel> ();
+//		masterSlidingPanel.onSlideBack += ResetGraph;
 	}
 
 	void Update()
@@ -60,19 +63,13 @@ public class Graph : MonoBehaviour {
 
 	public void ResetGraph()
 	{
-		ClearAllEmotions ();
-		_scrollRect.normalizedPosition = new Vector2 (0.5f, 0.5f);
-	}
-
-	public void ClearAllEmotions()
-	{
 		for(int i = 0; i < emotions.Count;i++)
 		{
 			EmotionDisplay display = emotions[i];
 			Destroy(display.gameObject);
 		}
-
 		emotions.Clear ();
+		_scrollRect.normalizedPosition = new Vector2 (0.5f, 0.5f);
 	}
 
 	Vector2 Reposition()
