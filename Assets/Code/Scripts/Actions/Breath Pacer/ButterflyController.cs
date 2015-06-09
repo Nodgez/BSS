@@ -25,6 +25,7 @@ public class ButterflyController : MonoBehaviour {
 		Settings = new BreathPacerSetting ();
 		animator = GetComponent<Animator> ();
 		animator.enabled = false;
+		ResetButterFly ();
 	}
 
 	void Update () 
@@ -84,9 +85,13 @@ public class ButterflyController : MonoBehaviour {
 	public void ResetButterFly ()
 	{
 		durationTimer = 0;
-		animator.enabled = true;
 		animator.Play ("ButterFly", -1, 0f);
 		ChangeState (BreathPacerState.Inhaling);
+	}
+
+	public void ToggleAnimation()
+	{
+		animator.enabled = !animator.enabled;
 	}
 
 	void ChangeState(BreathPacerState newState)
