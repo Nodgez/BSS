@@ -61,7 +61,8 @@ public class ButterflyController : MonoBehaviour {
 			if(timer >= inhaleTime)
 			{
 				ChangeState(BreathPacerState.Paused);
-				Instantiate (audioEffect);
+				if(Settings.audioOn)
+					Instantiate (audioEffect);
 				animator.enabled = false;
 			}
 			break;
@@ -69,14 +70,15 @@ public class ButterflyController : MonoBehaviour {
 			if(timer >= exhaleTime)
 			{
 				ChangeState(BreathPacerState.Paused);
-				Instantiate (audioEffect);
+				if(Settings.audioOn)
+					Instantiate (audioEffect);
 				animator.enabled = false;
 			}
 			break;
 		}
 		animator.speed = pbTime;
 
-		if (durationTimer > Settings.duration * 60) {
+		if (durationTimer >= Settings.duration * 60) {
 			animator.enabled = false;
 			Debug.Log("Done");
 		}
@@ -118,6 +120,8 @@ public class BreathPacerSetting
 	public int exhaleRate;
 	public int breathsPerMinute;
 	public float duration;
+	public bool audioOn = true;
+	public bool vibrationOn = true;
 
 	private int lastFrameInhale;
 	private int lastFrameExhale;

@@ -21,7 +21,6 @@ public class BreathPacerSettingsForm : MonoBehaviour {
 	public ButterflyController butterfly;
 
 	private SlidingPanel slidingPanel;
-	private bool audioIsOn = true;
 
 	void Start () 
 	{
@@ -52,10 +51,11 @@ public class BreathPacerSettingsForm : MonoBehaviour {
 	
 	public void ToggleAudio()
 	{
-		if(audioOnToggle.isOn)
-		{
+		settings.audioOn = audioOnToggle.isOn;
+	}
 
-		}
-		//Debug.Log (audioOnToggle.isOn);
+	public void ToggleVibration()
+	{
+		settings.vibrationOn = vibrateOnToggle.isOn;
 	}
 }
