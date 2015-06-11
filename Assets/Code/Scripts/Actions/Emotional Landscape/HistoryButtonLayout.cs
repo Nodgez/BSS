@@ -8,12 +8,12 @@ public class HistoryButtonLayout : LineLayout {
 	public Sprite[] moodColors = new Sprite[4];
 	public List<GraphData> graphData;
 	public MenuButton buttonPrefab;
-	private ELMenu elMenu;
+	private HistoryMenu hisMenu;
 
 	protected override void Start ()
 	{
-		elMenu = GameObject.FindObjectOfType<ELMenu> ();
-		graphData = elMenu.graphCollection;		
+		hisMenu = GameObject.FindObjectOfType<HistoryMenu> ();
+		graphData = hisMenu.graphCollection;		
 		buttons = new MenuButton[graphData.Count];
 
 		for (int i = 0; i < buttons.Length; i++)
@@ -27,7 +27,7 @@ public class HistoryButtonLayout : LineLayout {
 			buttons [i].GetComponentInChildren<Text> ().text = graphData [i].date.ToShortDateString ();
 			Button clickableButton = buttons [i].GetComponent<Button> ();
 			clickableButton.onClick.AddListener (delegate {
-				elMenu.SwapGraphInfo (graphData [currentIndex].date);
+				hisMenu.SwapGraphInfo (graphData [currentIndex].date);
 			});
 
 			for(int j = 0; j < buttons[i].transform.childCount;j++)

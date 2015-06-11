@@ -4,40 +4,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ELMenu : Menu {
+public class ELMenu : HistoryMenu {
 	
-	public EmotionDisplay emotionDisplay;
-	public HistoryButtonLayout historyDisplay;
-	public Button historyButton;
+	public EmotionDisplay emotionDisplay;	
 	public SlidingPanel[] emotionsPanels;
 	public EmotionalCollection availableEmotions;
 	public Graph visibleGraph;
-	public List<GraphData> graphCollection;
 	public GameObject addEmotionForm;
 	private Emotion selectedEmotion;
 	private List<Button> emotionButtons = new List<Button> ();
-	private GraphHistory graphHistory;
-	private DateTime dateOnDisplay;
-	private HistoryButtonLayout historyLayoutInstance;
 
 	protected override void Start()
 	{
-		//create a new graph history pointing to the location where the data is stroed
-		graphHistory = new GraphHistory (Application.persistentDataPath + "//Graph.xml");
-		graphCollection = graphHistory.Load();
-
-		bool hasDataForToday = false;
-		foreach(GraphData gd in graphCollection){
-			if(gd.date == DateTime.Today){
-				hasDataForToday = true;
-				break;
-			}
-		}
-
-		if(!hasDataForToday){
-			GraphData data = new GraphData(new List<Emotion>(), Vector2.one * 0.5f);
-			graphHistory.Save(data);
-		}
+		base.Start ();
 
 		//Find the Main sliding panel that slide from main menu to the Skill
 		GameObject masterMenuSlider = GameObject.Find ("MasterMenuSlider");
@@ -60,8 +39,6 @@ public class ELMenu : Menu {
 			foreach(Button b in tmpArray)
 				emotionButtons.Add(b);
 		}
-
-		base.Start ();
 	}
 
 	protected override void Update()
@@ -184,42 +161,23 @@ public class ELMenu : Menu {
 		CloseOpenPanels ();
 	}
 
-	public void OpenHistory()
-	{
-		if (historyLayoutInstance)
-			return;
-		historyLayoutInstance = Instantiate(historyDisplay) as HistoryButtonLayout;
-		historyLayoutInstance.gameObject.SetActive (true);
-		historyLayoutInstance.transform.SetParent(this.transform);
-		historyLayoutInstance.transform.localScale = Vector3.one;
-		RectTransform rectTrans = historyLayoutInstance.transform as RectTransform;
-		rectTrans.offsetMax = Vector2.zero;
-		rectTrans.offsetMin = Vector2.zero;
-	}
-
-	public void SwapGraphInfo(DateTime date)
+	public override void SwapGraphInfo (DateTime date)
 	{
 		if (visibleGraph == null)
 			return;
-		graphCollection = graphHistory.Load ();
-		foreach(GraphData gd in graphCollection)
-		{
+		base.SwapGraphInfo (date);
+
+		foreach (GraphData gd in graphCollection) {
 			//if the date we want isn't this data's date move to next piece of data
-			if(gd.date != date)
+			if (gd.date != date)
 				continue;
-
-			visibleGraph.ResetGraph();
-
-			foreach(Emotion em in gd.emotions)
-				AddSavedEmotionToGraph(em);
+			visibleGraph.ResetGraph ();
+			foreach (Emotion em in gd.emotions)
+				AddSavedEmotionToGraph (em);
 			dateOnDisplay = date;
-			historyButton.GetComponentInChildren<Text>().text = dateOnDisplay.ToShortDateString();
-			if(historyLayoutInstance)
-				Destroy(historyLayoutInstance.gameObject);
-			break;
 		}
 	}
-
+	
 	public void SaveCurrentEmotionalState ()
 	{
 		List<Emotion> emotionsOnDisplay = new List<Emotion> ();

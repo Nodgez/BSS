@@ -1,0 +1,39 @@
+Foreground is the whole box without words, dots or colour scale sphere. It also includes emotional properties text and line.
+
+The green colour emotion text box is one which has already selected.
+Yellow is unselected.
+Try get the same colour text as setup images.
+
+Sometimes people might select more than 4 emotions, maybe they could be scrollable
+into transparency at box borders if more than 4, a bit like how the menu orbs go transparent(we will need to make a limit
+of how many emotionns can be selected anyway on EL or how far the colour scale can move)
+
+I made the boxes as single pngs but also as pngs with the dots.
+You can choose yourself to use the ones with the dots or else put in the dots seperately
+depending on how you want to code it.
+
+The colour sphere should appear in position as saved from the EL just like in the Emotional History.
+
+Instruction 1 comes up first time you use app skill.
+
+Instruction 2 always comes up if you havent filled EL yet.
+
+The questions box comes up when an emotion is tapped (selected)
+It comes up to right of the emotions so you can quickly touch the next
+emotion to fill out the next questions rather than closing and opening
+everything over and again.
+
+If you tap outside the question box it closes.
+
+The questions can be scrolled up and down.
+
+Tap a white box to enter text in it.
+
+Everything saves automatically.
+
+The calendar button opens up Emotional History calendar. You might need to stretch the
+dark transparent background of emotional history assets to fit screen better depending on skill page
+as it is without the grey borders from EL.
+
+You will need to get all the questions off David, think there is only 4 or 5 of them?
+
