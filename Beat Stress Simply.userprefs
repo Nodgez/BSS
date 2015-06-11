@@ -1,15 +1,18 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Scripts\Actions\Breath Pacer\ButterflyController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Scripts\Actions\Emotional Properties\EPMenu.cs">
     <Files>
-      <File FileName="Assets\Code\Scripts\Actions\Breath Pacer\ButterflyController.cs" Line="28" Column="21" />
-      <File FileName="Assets\Code\Scripts\Actions\Breath Pacer\BreathPacerSettingsForm.cs" Line="33" Column="41" />
-      <File FileName="Assets\Images\Breath Pacer\Info.txt" Line="1" Column="1" />
-      <File FileName="Assets\TimedObject.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Scripts\Actions\Emotional Properties\EPMenu.cs" Line="89" Column="23" />
+      <File FileName="Assets\Code\Scripts\Actions\Emotional Properties\EmotionListFromGraph.cs" Line="34" Column="54" />
+      <File FileName="Assets\Code\Scripts\Actions\Emotional Landscape\Graph.cs" Line="123" Column="1" />
+      <File FileName="Assets\Code\Scripts\Base\SlidingPanel.cs" Line="68" Column="2" />
+      <File FileName="Assets\Code\Scripts\Actions\Emotional Landscape\Emotion.cs" Line="27" Column="46" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\kevin\Desktop\Unity 5\Beat Stress Simply\Assets\Code\Scripts\Actions\Emotional Properties\EPMenu.cs" line="88" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

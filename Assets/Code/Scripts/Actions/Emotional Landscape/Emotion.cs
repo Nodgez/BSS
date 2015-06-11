@@ -13,6 +13,7 @@ public class Emotion
 	public Vector3 position;
 	public EmotionType emotionType;
 	public string emotionName;
+	public EmotionalProperty properties;
 
 	public Emotion()
 	{
@@ -23,5 +24,6 @@ public class Emotion
 		this.position = position;
 		this.emotionName = emotionName;
 		this.emotionType = emotionType;
+		this.properties = new EmotionalProperty ();
 	}
 }

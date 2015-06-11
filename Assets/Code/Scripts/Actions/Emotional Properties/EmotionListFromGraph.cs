@@ -7,11 +7,10 @@ public class EmotionListFromGraph : MonoBehaviour {
 
 	public Button emotionButton;
 	public Image emptySlotPrefab;
+	public EPMenu epMenu;
 
 	public void AddEmotions(List<Emotion> emotions)
 	{
-		EPMenu epMenu = GameObject.Find ("EPMenu").GetComponent<EPMenu> ();
-
 		if (transform.childCount > 0)
 			for (int c = 0; c < transform.childCount; c++)
 				Destroy(transform.GetChild (c).gameObject);
@@ -29,8 +28,9 @@ public class EmotionListFromGraph : MonoBehaviour {
 			newButton.transform.SetParent(transform);
 			newButton.transform.localScale = Vector3.one;
 			newButton.GetComponentInChildren<Text>().text = emotions[i].emotionName;
+			int currentIndex = i;
 			newButton.onClick.AddListener(delegate {
-				epMenu.OpenPropertiesPanel ();
+				epMenu.OpenPropertiesPanel (emotions[currentIndex].emotionName);
 			});
 		}
 	}

@@ -22,17 +22,19 @@ public class HistoryMenu : Menu {
 		graphCollection = graphHistory.Load();
 		
 		bool hasDataForToday = false;
-		foreach(GraphData gd in graphCollection){
-			if(gd.date == DateTime.Today){
+		for(int i = graphCollection.Count -1; i > -1; i--)
+		{
+			if(graphCollection[i].date == DateTime.Today){
 				hasDataForToday = true;
-				break;
 			}
+			if(graphCollection[i].emotions.Count <= 0)
+				graphCollection.RemoveAt(i);
 		}
-		
 		if(!hasDataForToday){
 			GraphData data = new GraphData(new List<Emotion>(), Vector2.one * 0.5f);
-			graphHistory.Save(data);
+			graphCollection.Add(data);
 		}
+		graphHistory.Save (graphCollection);
 
 		base.Start ();
 	}
@@ -79,7 +81,7 @@ public class HistoryMenu : Menu {
 			if(data.date == DateTime.Today)
 				return data;
 		}
-		return null;
+		return new GraphData(new List<Emotion>(), Vector2.one * 0.5f);
 	}
 
 	public GraphData GetDataAtDate(DateTime date)
@@ -88,6 +90,6 @@ public class HistoryMenu : Menu {
 			if(data.date == date)
 				return data;
 		}
-		return null;
+		return GetTodayData();
 	}
 }

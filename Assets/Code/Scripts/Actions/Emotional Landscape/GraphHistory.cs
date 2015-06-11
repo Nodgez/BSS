@@ -46,6 +46,15 @@ public class GraphHistory {
 		fs.Close ();
 	}
 
+	public void Save(List<GraphData> data)
+	{
+		//Open the file stream and save the data to the directory
+		fs = new FileStream (directory, FileMode.Create);
+		XmlSerializer serializer = new XmlSerializer (typeof(List<GraphData>));
+		serializer.Serialize (fs, data);
+		fs.Close ();
+	}
+
 	public List<GraphData> Load()
 	{
 		fs = new FileStream (directory, FileMode.Open);

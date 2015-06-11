@@ -17,15 +17,15 @@ public class ELMenuEmotions : MonoBehaviour {
 		elMenu = GameObject.Find ("ELMenu").GetComponent<ELMenu> ();
 		if (!elMenu)
 			return;
-		RectTransform rectTrans = transform as RectTransform;
 		foreach (Emotion emo in emotionalCollection.emotions) {
 			if (emo.emotionType == typeToOrder)
 				emotionsToStore.Add (emo);
 		}
 		emotionsToStore.Sort ((x, y) => string.Compare (x.emotionName, y.emotionName));
-		float heightOfContainer = emotionsToStore.Count * 50;
-		rectTrans.offsetMax = new Vector2 (rectTrans.offsetMax.x, -30);
-		rectTrans.offsetMin = new Vector2 (rectTrans.offsetMin.x, -heightOfContainer);
+
+		ItemSizedBox sizedBox = GetComponent<ItemSizedBox> ();
+		sizedBox.size = emotionsToStore.Count;
+
 		for (int i = 0; i < emotionsToStore.Count; i++) {
 			//create button and add event
 			int index = emotionalCollection.IndexOf (emotionsToStore [i]);
