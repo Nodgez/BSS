@@ -27,3 +27,27 @@ public class Emotion
 		this.properties = new EmotionalProperty ();
 	}
 }
+
+public class EmotionalProperty
+{
+	public string emotionLocation;
+	public string emotionIntensity;
+	public string emotionColor;
+	public string emotionTemperature;
+	public string emotionSound;
+	public string emotionSize;
+	public string emotionMoveThrough;
+	public string emotionMoveOff;
+
+	public EmotionalProperty()
+	{
+		emotionLocation = "";
+		emotionSize = "";
+		emotionIntensity = "";
+		emotionColor = "";
+		emotionTemperature = "";
+		emotionSound = "";
+		emotionMoveThrough = "";
+		emotionMoveOff = "";
+	}
+}

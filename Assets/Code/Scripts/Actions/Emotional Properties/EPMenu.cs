@@ -1,26 +1,35 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 using System.Collections;
 
 public class EPMenu : HistoryMenu {
 
 	public EmotionListFromGraph emotionList;
 	public GraphRepresentation graphRepresentation;
-	public SlidingPanel propertiesPanel;
+	public PropertiesForm propertiesForm;
 
 	private GraphData dataOnDisplay;
-	private Emotion currentEmotionforEdit;
-	private EventSystem eventSystem;
-
 	protected override void Start ()
 	{
 		base.Start ();
-		GraphData todayData = GetTodayData ();
-		emotionList.AddEmotions (todayData.emotions);
-		graphRepresentation.Shift (todayData.normailzedGraphPosition);
-		eventSystem = GameObject.Find ("EventSystem").GetComponent<EventSystem> ();
+//		GraphData todayData = GetTodayData ();
+//		emotionList.AddEmotions (todayData.emotions);
+//		graphRepresentation.Shift (todayData.normailzedGraphPosition);
 		dataOnDisplay = GetTodayData ();
+
+		GameObject masterMenuSlider = GameObject.Find ("MasterMenuSlider");
+		if(masterMenuSlider != null)
+		{
+			//Get the slding event and add toggle  scrips to trigger on it's completion
+			SlidingPanel silder = masterMenuSlider.GetComponent<SlidingPanel> ();
+			silder.onSlideTo += ToggleDisabledObjects;
+			silder.onSlideTo += delegate {
+				//If data exists for today then load it
+				SwapGraphInfo (DateTime.Today);
+			};
+		}
 	}
 
 	protected override void Update ()
@@ -35,70 +44,27 @@ public class EPMenu : HistoryMenu {
 		GraphData data = GetDataAtDate (date);
 		if (data == null)
 			return;
-		emotionList.AddEmotions (data.emotions);
+		if (emotionList)
+			emotionList.AddEmotions (data.emotions);
 		graphRepresentation.Shift (data.normailzedGraphPosition);
 		dataOnDisplay = data;
+
+		propertiesForm.SwapInfo (data.emotions [0]);
 	}
 
-	public void OpenPropertiesPanel(string name)
+	public void OpenPropertiesForm(string name)
 	{
-		if (currentEmotionforEdit != null) {
-			if (currentEmotionforEdit.emotionName == name)
-				propertiesPanel.SlideView ();
-		}
+		Emotion currentEmotionForEdit = null;
 		foreach (Emotion emo in dataOnDisplay.emotions)
 			if (emo.emotionName == name)
-				currentEmotionforEdit = emo;
+				currentEmotionForEdit = emo;
+
+		if (currentEmotionForEdit != null) 
+			propertiesForm.SwapInfo (currentEmotionForEdit);
 	}
 
-	public void OnEditProperty()
+	public void SaveProperties()
 	{
-		GameObject selectedObject = eventSystem.currentSelectedGameObject;
-		Debug.Log (selectedObject.name);
-		EmotionalProperty property = currentEmotionforEdit.properties;
-		if (property == null)
-			property = new EmotionalProperty ();
-		InputField input = selectedObject.GetComponent<InputField> ();
-		switch(selectedObject.name)
-		{
-		case "Feel Input":
-			property.emotionLocation = input.text;
-			break;
-		case "Size Input":
-			property.emotionSize = input.text;
-			break;
-		case "Sound Input":
-			property.emotionSound = input.text;
-			break;
-		case "Temperature Input":
-			property.emotionTemperature = input.text;
-			break;
-		case "Intensity Input":
-			property.emotionIntensity = input.text;
-			break;
-		case "Colour Input":
-			property.emotionColor = input.text;
-			break;
-		case "Through Body Input":
-			property.emotionMoveThrough = input.text;
-			break;
-		case "Off Body Input":
-			property.emotionMoveOff = input.text;
-			break;
-		}
-		currentEmotionforEdit.properties = property;
 		graphHistory.Save (graphCollection);
 	}
-}
-
-public class EmotionalProperty
-{
-	public string emotionLocation;
-	public string emotionIntensity;
-	public string emotionColor;
-	public string emotionTemperature;
-	public string emotionSound;
-	public string emotionSize;
-	public string emotionMoveThrough;
-	public string emotionMoveOff;
 }

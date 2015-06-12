@@ -54,7 +54,6 @@ public class ELMenu : HistoryMenu {
 					panel.SlideView ();
 				AddEmotionToGraph ();
 				selectedEmotion = null;
-			Debug.Log ("Emotion Nulled");
 			}
 
 		base.Update ();

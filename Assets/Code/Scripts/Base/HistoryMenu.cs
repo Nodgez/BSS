@@ -9,10 +9,10 @@ public class HistoryMenu : Menu {
 	public Button historyButton;
 	public HistoryButtonLayout historyDisplay;
 	public List<GraphData> graphCollection;
-
+	public DateTime dateOnDisplay;
+	
 	protected static GraphHistory graphHistory;
 	protected HistoryButtonLayout historyLayoutInstance;
-	protected DateTime dateOnDisplay;
 	
 	protected override void Start () 
 	{
@@ -68,7 +68,9 @@ public class HistoryMenu : Menu {
 			if (gd.date != date)
 				continue;
 		
-			historyButton.GetComponentInChildren<Text> ().text = date.ToShortDateString ();
+			dateOnDisplay = date;
+			if(historyButton)
+				historyButton.GetComponentInChildren<Text> ().text = date.ToShortDateString ();
 			if (historyLayoutInstance)
 				Destroy (historyLayoutInstance.gameObject);
 			break;

@@ -8,6 +8,7 @@ public class GraphRepresentation : MonoBehaviour {
 	
 	public void Shift(Vector2 directon)
 	{
-		_scrollRect.normalizedPosition = directon;
+		if(_scrollRect)
+			_scrollRect.normalizedPosition = directon;
 	}
 }

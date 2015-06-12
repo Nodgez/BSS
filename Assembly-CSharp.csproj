@@ -63,6 +63,8 @@
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\HistoryButtonLayout.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Properties\EPMenu.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Properties\EmotionListFromGraph.cs" />
+     <Compile Include="Assets\Code\Scripts\Actions\Emotional Properties\GraphRepresentation.cs" />
+     <Compile Include="Assets\Code\Scripts\Actions\Emotional Properties\PropertiesForm.cs" />
      <Compile Include="Assets\Code\Scripts\Base\ButtonLayouts\ButtonLayout.cs" />
      <Compile Include="Assets\Code\Scripts\Base\ButtonLayouts\ButtonWheel.cs" />
      <Compile Include="Assets\Code\Scripts\Base\ButtonLayouts\CurveLayout.cs" />
@@ -71,9 +73,12 @@
      <Compile Include="Assets\Code\Scripts\Base\ItemSizedBox.cs" />
      <Compile Include="Assets\Code\Scripts\Base\Menu.cs" />
      <Compile Include="Assets\Code\Scripts\Base\SlidingPanel.cs" />
+     <Compile Include="Assets\Code\Scripts\Draggable.cs" />
+     <Compile Include="Assets\Code\Scripts\FixPosition.cs" />
      <Compile Include="Assets\Code\Scripts\MainMenu\MainMenuPanel.cs" />
      <Compile Include="Assets\Code\Scripts\MainMenu\MenuButton.cs" />
      <Compile Include="Assets\Code\Scripts\MainMenu\MenuText.cs" />
+     <Compile Include="Assets\Code\Scripts\TimedObject.cs" />
      <Compile Include="Assets\Code\Scripts\Utilities\EscapeListener.cs" />
      <Compile Include="Assets\Code\Scripts\Utilities\GestureHandler.cs" />
      <Compile Include="Assets\Code\Scripts\Utilities\MathExt.cs" />
@@ -81,10 +86,6 @@
      <Compile Include="Assets\Code\Scripts\Utilities\TextDebug.cs" />
      <Compile Include="Assets\Code\Tests\RenderScripts.cs" />
      <Compile Include="Assets\Code\Tests\ScrollRectDebug.cs" />
-     <Compile Include="Assets\Draggable.cs" />
-     <Compile Include="Assets\FixPosition.cs" />
-     <Compile Include="Assets\GraphRepresentation.cs" />
-     <Compile Include="Assets\TimedObject.cs" />
      <None Include="Assets\Images\EmotionalProperties2\Info.txt" />
      <None Include="Assets\Images\Breath Pacer\Info.txt" />
      <None Include="Assets\Images\Emotionl Landscape\Info.txt" />
