@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class HistoryButtonLayout : LineLayout {
 
 	public Sprite[] moodColors = new Sprite[4];
-	public List<GraphData> graphData;
+	public List<SaveData> graphData;
 	public MenuButton buttonPrefab;
 	private HistoryMenu hisMenu;
 
@@ -15,6 +15,9 @@ public class HistoryButtonLayout : LineLayout {
 		hisMenu = GameObject.FindObjectOfType<HistoryMenu> ();
 		graphData = hisMenu.graphCollection;		
 		buttons = new MenuButton[graphData.Count];
+
+		if(buttons.Length <= 0)
+			return;
 
 		for (int i = 0; i < buttons.Length; i++)
 		{
@@ -45,7 +48,7 @@ public class HistoryButtonLayout : LineLayout {
 		base.Update ();
 	}
 
-	Sprite SolveImage(GraphData data)
+	Sprite SolveImage(SaveData data)
 	{
 		Vector2 graphCoords = data.normailzedGraphPosition;
 		if(graphCoords.x > 0.5f && graphCoords.y > 0.5f)	//Emergency high energy

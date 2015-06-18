@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections;
@@ -8,7 +8,7 @@ public class HistoryMenu : Menu {
 
 	public Button historyButton;
 	public HistoryButtonLayout historyDisplay;
-	public List<GraphData> graphCollection;
+	public List<SaveData> graphCollection;
 	public DateTime dateOnDisplay;
 	
 	protected static GraphHistory graphHistory;
@@ -31,7 +31,7 @@ public class HistoryMenu : Menu {
 				graphCollection.RemoveAt(i);
 		}
 		if(!hasDataForToday){
-			GraphData data = new GraphData(new List<Emotion>(), Vector2.one * 0.5f);
+			SaveData data = new SaveData(new List<Emotion>(), Vector2.one * 0.5f);
 			graphCollection.Add(data);
 		}
 		graphHistory.Save (graphCollection);
@@ -63,7 +63,7 @@ public class HistoryMenu : Menu {
 	public virtual void SwapGraphInfo(DateTime date)
 	{
 		graphCollection = graphHistory.Load ();
-		foreach (GraphData gd in graphCollection) {
+		foreach (SaveData gd in graphCollection) {
 			//if the date we want isn't this data's date move to next piece of data
 			if (gd.date != date)
 				continue;
@@ -77,16 +77,16 @@ public class HistoryMenu : Menu {
 		}
 	}
 
-	public GraphData GetTodayData()
+	public SaveData GetTodayData()
 	{
 		foreach (var data in graphCollection) {
 			if(data.date == DateTime.Today)
 				return data;
 		}
-		return new GraphData(new List<Emotion>(), Vector2.one * 0.5f);
+		return new SaveData(new List<Emotion>(), Vector2.one * 0.5f);
 	}
 
-	public GraphData GetDataAtDate(DateTime date)
+	public SaveData GetDataAtDate(DateTime date)
 	{
 		foreach (var data in graphCollection) {
 			if(data.date == date)

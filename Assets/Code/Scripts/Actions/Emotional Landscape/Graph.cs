@@ -120,23 +120,27 @@ public class Graph : MonoBehaviour {
 }
 
 [Serializable]
-public class GraphData
+public class SaveData
 {
 	public DateTime date;
 	public List<Emotion> emotions;
 	public Vector2 normailzedGraphPosition;
+	public PositivityRatioInfo positivityRatio;
+	public StrengthsInfo strengths;
 
-	public GraphData()
+	public SaveData()
 	{
 		this.date = DateTime.Today;
 		this.emotions = null;
 		this.normailzedGraphPosition = new Vector2 (0.5f, 0.5f);
+		//this.positivityRatio = new PositivityRatioInfo ();
 	}
 
-	public GraphData(List<Emotion> emotions, Vector2 normailzedGraphPosition)
+	public SaveData(List<Emotion> emotions, Vector2 normailzedGraphPosition)
 	{
 		this.date = DateTime.Today;
 		this.emotions = emotions;
 		this.normailzedGraphPosition = normailzedGraphPosition;
+		//this.positivityRatio = new PositivityRatioInfo ();
 	}
 }

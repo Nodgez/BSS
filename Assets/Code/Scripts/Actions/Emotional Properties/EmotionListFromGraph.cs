@@ -20,7 +20,7 @@ public class EmotionListFromGraph : MonoBehaviour {
 		{
 			Image img = Instantiate(emptyLandscapeImage) as Image;
 			img.transform.SetParent(transform);
-			img.transform.localScale = Vector3.zero;
+			img.transform.localScale = Vector3.one;
 			return;
 		}
 

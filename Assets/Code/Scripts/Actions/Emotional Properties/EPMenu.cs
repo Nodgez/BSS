@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
@@ -10,7 +10,7 @@ public class EPMenu : HistoryMenu {
 	public GraphRepresentation graphRepresentation;
 	public PropertiesForm propertiesForm;
 
-	private GraphData dataOnDisplay;
+	private SaveData dataOnDisplay;
 	protected override void Start ()
 	{
 		base.Start ();
@@ -41,15 +41,13 @@ public class EPMenu : HistoryMenu {
 	{
 		base.SwapGraphInfo (date);
 
-		GraphData data = GetDataAtDate (date);
-		if (data == null)
-			return;
+		SaveData data = GetDataAtDate (date);
 		if (emotionList)
 			emotionList.AddEmotions (data.emotions);
 		graphRepresentation.Shift (data.normailzedGraphPosition);
 		dataOnDisplay = data;
 
-		propertiesForm.SwapInfo (data.emotions [0]);
+		//propertiesForm.SwapInfo (data.emotions [0]);
 	}
 
 	public void OpenPropertiesForm(string name)

@@ -65,6 +65,10 @@
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Properties\EmotionListFromGraph.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Properties\GraphRepresentation.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Properties\PropertiesForm.cs" />
+     <Compile Include="Assets\Code\Scripts\Actions\Positivity Ratios\PRMenu.cs" />
+     <Compile Include="Assets\Code\Scripts\Actions\Positivity Ratios\PositivityRatioForm.cs" />
+     <Compile Include="Assets\Code\Scripts\Actions\Strengths\StrMenu.cs" />
+     <Compile Include="Assets\Code\Scripts\Actions\Strengths\StrengthsForm.cs" />
      <Compile Include="Assets\Code\Scripts\Base\ButtonLayouts\ButtonLayout.cs" />
      <Compile Include="Assets\Code\Scripts\Base\ButtonLayouts\ButtonWheel.cs" />
      <Compile Include="Assets\Code\Scripts\Base\ButtonLayouts\CurveLayout.cs" />
@@ -86,10 +90,12 @@
      <Compile Include="Assets\Code\Scripts\Utilities\TextDebug.cs" />
      <Compile Include="Assets\Code\Tests\RenderScripts.cs" />
      <Compile Include="Assets\Code\Tests\ScrollRectDebug.cs" />
+     <Compile Include="Assets\SizeToScreen.cs" />
      <None Include="Assets\Images\EmotionalProperties2\Info.txt" />
      <None Include="Assets\Images\Breath Pacer\Info.txt" />
      <None Include="Assets\Images\Emotionl Landscape\Info.txt" />
      <None Include="Assets\Images\BreatPacerAssetsResized\Info.txt" />
+     <None Include="Assets\Images\PositivityRatioAssetsResized\Info.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

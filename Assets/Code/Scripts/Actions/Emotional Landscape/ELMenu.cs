@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections;
@@ -166,14 +166,13 @@ public class ELMenu : HistoryMenu {
 			return;
 		base.SwapGraphInfo (date);
 
-		foreach (GraphData gd in graphCollection) {
+		foreach (SaveData gd in graphCollection) {
 			//if the date we want isn't this data's date move to next piece of data
 			if (gd.date != date)
 				continue;
 			visibleGraph.ResetGraph ();
 			foreach (Emotion em in gd.emotions)
 				AddSavedEmotionToGraph (em);
-			dateOnDisplay = date;
 		}
 	}
 	
@@ -182,7 +181,7 @@ public class ELMenu : HistoryMenu {
 		List<Emotion> emotionsOnDisplay = new List<Emotion> ();
 		foreach (EmotionDisplay ed in visibleGraph.GetDisplayedEmotions)
 			emotionsOnDisplay.Add (ed.emotion);
-		GraphData data = new GraphData (emotionsOnDisplay, visibleGraph.ShiftedPosition);
+		SaveData data = new SaveData (emotionsOnDisplay, visibleGraph.ShiftedPosition);
 		graphHistory.Save (data);
 	}
 

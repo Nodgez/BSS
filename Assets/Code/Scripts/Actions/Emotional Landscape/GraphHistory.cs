@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.IO;
 using System.Xml;
@@ -9,7 +9,7 @@ using System.Collections;
 
 public class GraphHistory {
 
-	private List<GraphData> graphData = new List<GraphData> ();
+	private List<SaveData> graphData = new List<SaveData> ();
 	public string directory;
 	private FileStream fs;
 
@@ -24,12 +24,12 @@ public class GraphHistory {
 	}
 
 	//Save the data displayed on the graph
-	public void Save(GraphData data)
+	public void Save(SaveData data)
 	{
 		graphData = Load ();	//Load in the current set of emotions
 		for(int i = 0; i < graphData.Count;i++)
 		{
-			GraphData testData = graphData[i];
+			SaveData testData = graphData[i];
 			//needs to be changed to test D-M-Y
 			//if the data for a day alrady exists then swap it out
 			if(testData.date == DateTime.Today)
@@ -41,36 +41,36 @@ public class GraphHistory {
 
 		//Open the file stream and save the data to the directory
 		fs = new FileStream (directory, FileMode.Create);
-		XmlSerializer serializer = new XmlSerializer (typeof(List<GraphData>));
+		XmlSerializer serializer = new XmlSerializer (typeof(List<SaveData>));
 		serializer.Serialize (fs, graphData);
 		fs.Close ();
 	}
 
-	public void Save(List<GraphData> data)
+	public void Save(List<SaveData> data)
 	{
 		//Open the file stream and save the data to the directory
 		fs = new FileStream (directory, FileMode.Create);
-		XmlSerializer serializer = new XmlSerializer (typeof(List<GraphData>));
+		XmlSerializer serializer = new XmlSerializer (typeof(List<SaveData>));
 		serializer.Serialize (fs, data);
 		fs.Close ();
 	}
 
-	public List<GraphData> Load()
+	public List<SaveData> Load()
 	{
 		fs = new FileStream (directory, FileMode.Open);
-		List<GraphData> allGraphs = new List<GraphData> ();
+		List<SaveData> allGraphs = new List<SaveData> ();
 
 		try
 		{
-			XmlSerializer serializer = new XmlSerializer (typeof(List<GraphData>));
-			List<GraphData> data = serializer.Deserialize (fs) as List<GraphData>;
+			XmlSerializer serializer = new XmlSerializer (typeof(List<SaveData>));
+			List<SaveData> data = serializer.Deserialize (fs) as List<SaveData>;
 			allGraphs = data;
 		}
 
 		catch
 		{
 			fs.Close();
-			return new List<GraphData>();
+			return new List<SaveData>();
 		}
 		fs.Close ();
 		return allGraphs;

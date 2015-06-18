@@ -18,6 +18,8 @@ public class SlidingPanel : MonoBehaviour {
 	public float sliderDirection = -1.0f;
 	public float factor = 1.0f;
 
+	private bool slidingLastFrame;
+
 	protected virtual void Update () 
 	{
 		if(sliding)
@@ -48,6 +50,7 @@ public class SlidingPanel : MonoBehaviour {
 				controllingSlider.value = Mathf.Round(value);
 				sliding = false;
 			}
+			slidingLastFrame = sliding;
 		}
 	}
 

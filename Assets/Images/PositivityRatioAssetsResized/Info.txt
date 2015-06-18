@@ -1,0 +1,15 @@
+The Positivity Ratio Foreground has the white text boxes already in it. However i also attached an image of the white box seperately. You can just put this seperate ones over the ones on the positivity Ratio Box if you need them seperate. I wasn't able to save the image without them. 
+
+The Positivity Ratio Box is 2 mobile screen longs. The arrows signal to go up and down. Otherwise i'm not sure if its obvious enough. Could just be a swipe down screen but arrows should remain to indicate theres more.
+
+Text in boxes should be the same medium grey colour.
+
+The calendar which is on most skill screens except the breath pacer should open the same calendar as the emotional diary, you may have to stretch the dark grey transparent background that comes up with the diary to fit certain skill screens.
+
+The colour scale circle in diary (emotional history) should save from the emotional landscape and appear the same in the calendar on every skill page.
+
+If somebody goes to another skill screen screen before using the EL then the circle can just appear neutral or centered as it has not been moved.
+
+However on the EP page there has to be the text i sent you with that asset folder to say please fill out the EL first.
+
+Sorry if its complicated but it pretty much has to be like this i guess.
