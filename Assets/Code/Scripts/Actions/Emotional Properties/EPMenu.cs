@@ -17,7 +17,7 @@ public class EPMenu : HistoryMenu {
 //		GraphData todayData = GetTodayData ();
 //		emotionList.AddEmotions (todayData.emotions);
 //		graphRepresentation.Shift (todayData.normailzedGraphPosition);
-		dataOnDisplay = GetTodayData ();
+		dataOnDisplay = saveDataManager.GetTodayData ();
 
 		GameObject masterMenuSlider = GameObject.Find ("MasterMenuSlider");
 		if(masterMenuSlider != null)
@@ -41,7 +41,7 @@ public class EPMenu : HistoryMenu {
 	{
 		base.SwapGraphInfo (date);
 
-		SaveData data = GetDataAtDate (date);
+		SaveData data = saveDataManager.GetDataAtDate (date);
 		if (emotionList)
 			emotionList.AddEmotions (data.emotions);
 		graphRepresentation.Shift (data.normailzedGraphPosition);
@@ -63,6 +63,6 @@ public class EPMenu : HistoryMenu {
 
 	public void SaveProperties()
 	{
-		graphHistory.Save (graphCollection);
+		saveDataManager.Save (graphCollection);
 	}
 }

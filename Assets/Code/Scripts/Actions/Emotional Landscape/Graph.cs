@@ -11,7 +11,7 @@ public class Graph : MonoBehaviour {
 	private bool sliding = false;
 	private Vector2 lerpEnd;
 	private float lerpValue;
-	private GraphHistory graphHistory;
+	private SaveHistory graphHistory;
 
 	void Start () 
 	{
@@ -127,13 +127,13 @@ public class SaveData
 	public Vector2 normailzedGraphPosition;
 	public PositivityRatioInfo positivityRatio;
 	public StrengthsInfo strengths;
+	public string journalEntry;
 
 	public SaveData()
 	{
 		this.date = DateTime.Today;
 		this.emotions = null;
 		this.normailzedGraphPosition = new Vector2 (0.5f, 0.5f);
-		//this.positivityRatio = new PositivityRatioInfo ();
 	}
 
 	public SaveData(List<Emotion> emotions, Vector2 normailzedGraphPosition)

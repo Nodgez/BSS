@@ -11,15 +11,15 @@ public class HistoryMenu : Menu {
 	public List<SaveData> graphCollection;
 	public DateTime dateOnDisplay;
 	
-	protected static GraphHistory graphHistory;
+	protected static SaveHistory saveDataManager;
 	protected HistoryButtonLayout historyLayoutInstance;
 	
 	protected override void Start () 
 	{
-		//create a new graph history pointing to the location where the data is stroed
-		if(graphHistory == null)
-			graphHistory = new GraphHistory (Application.persistentDataPath + "//Graph.xml");
-		graphCollection = graphHistory.Load();
+		//create a new graph history pointing to the location where the data is stored
+		if(saveDataManager == null)
+			saveDataManager = new SaveHistory (Application.persistentDataPath + "//Graph.xml");
+		graphCollection = saveDataManager.Load();
 		
 		bool hasDataForToday = false;
 		for(int i = graphCollection.Count -1; i > -1; i--)
@@ -34,7 +34,7 @@ public class HistoryMenu : Menu {
 			SaveData data = new SaveData(new List<Emotion>(), Vector2.one * 0.5f);
 			graphCollection.Add(data);
 		}
-		graphHistory.Save (graphCollection);
+		saveDataManager.Save (graphCollection);
 
 		base.Start ();
 	}
@@ -62,7 +62,7 @@ public class HistoryMenu : Menu {
 
 	public virtual void SwapGraphInfo(DateTime date)
 	{
-		graphCollection = graphHistory.Load ();
+		graphCollection = saveDataManager.Load ();
 		foreach (SaveData gd in graphCollection) {
 			//if the date we want isn't this data's date move to next piece of data
 			if (gd.date != date)
@@ -75,23 +75,5 @@ public class HistoryMenu : Menu {
 				Destroy (historyLayoutInstance.gameObject);
 			break;
 		}
-	}
-
-	public SaveData GetTodayData()
-	{
-		foreach (var data in graphCollection) {
-			if(data.date == DateTime.Today)
-				return data;
-		}
-		return new SaveData(new List<Emotion>(), Vector2.one * 0.5f);
-	}
-
-	public SaveData GetDataAtDate(DateTime date)
-	{
-		foreach (var data in graphCollection) {
-			if(data.date == date)
-				return data;
-		}
-		return GetTodayData();
 	}
 }

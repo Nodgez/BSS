@@ -32,14 +32,14 @@ public class StrMenu : HistoryMenu {
 	{
 		base.SwapGraphInfo (date);
 
-		SaveData data = GetDataAtDate (date);
+		SaveData data = saveDataManager.GetDataAtDate (date);
 		strForm.Info = data.strengths;
 	}
 
 	public void OnInfoEdit()
 	{
-		SaveData data = GetTodayData ();
+		SaveData data = saveDataManager.GetTodayData ();
 		data.strengths = strForm.Info;
-		graphHistory.Save (data);
+		saveDataManager.Save (data);
 	}
 }

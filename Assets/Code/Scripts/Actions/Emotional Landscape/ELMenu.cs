@@ -182,7 +182,7 @@ public class ELMenu : HistoryMenu {
 		foreach (EmotionDisplay ed in visibleGraph.GetDisplayedEmotions)
 			emotionsOnDisplay.Add (ed.emotion);
 		SaveData data = new SaveData (emotionsOnDisplay, visibleGraph.ShiftedPosition);
-		graphHistory.Save (data);
+		saveDataManager.Save (data);
 	}
 
 	public void AddEmotionToList()

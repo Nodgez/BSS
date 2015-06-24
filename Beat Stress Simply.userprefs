@@ -1,13 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Scripts\Actions\Positivity Ratios\PRMenu.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\JournalEntry.cs">
     <Files>
-      <File FileName="Assets\Code\Scripts\Actions\Strengths\StrMenu.cs" Line="23" Column="4" />
-      <File FileName="Assets\Code\Scripts\Actions\Positivity Ratios\PositivityRatioForm.cs" Line="39" Column="2" />
-      <File FileName="Assets\Code\Scripts\Actions\Positivity Ratios\PRMenu.cs" Line="31" Column="38" />
-      <File FileName="Assets\Code\Scripts\Actions\Strengths\StrengthsForm.cs" Line="1" Column="1" />
+      <File FileName="Assets\JournalEntry.cs" Line="22" Column="16" />
+      <File FileName="Assets\Code\Scripts\Actions\Emotional Landscape\SaveHistory.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Scripts\Actions\Emotional Landscape\Graph.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Scripts\Base\HistoryMenu.cs" Line="7" Column="1" />
+      <File FileName="Assets\Code\Scripts\Base\Menu.cs" Line="1" Column="1" />
+      <File FileName="Assets\JournalMenu.cs" Line="27" Column="15" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

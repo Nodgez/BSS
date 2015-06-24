@@ -32,14 +32,14 @@ public class PRMenu : HistoryMenu {
 	{
 		base.SwapGraphInfo (date);
 
-		SaveData data = GetDataAtDate (date);
+		SaveData data = saveDataManager.GetDataAtDate (date);
 		prForm.Info = data.positivityRatio;
 	}
 
 	public void OnInfoEdit()
 	{
-		SaveData data = GetTodayData ();
+		SaveData data = saveDataManager.GetTodayData ();
 		data.positivityRatio = prForm.Info;
-		graphHistory.Save (data);
+		saveDataManager.Save (data);
 	}
 }

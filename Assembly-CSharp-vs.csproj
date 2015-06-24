@@ -59,8 +59,8 @@
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\EmotionDisplay.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\EmotionalCollection.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\Graph.cs" />
-     <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\GraphHistory.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\HistoryButtonLayout.cs" />
+     <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\SaveHistory.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Properties\EPMenu.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Properties\EmotionListFromGraph.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Properties\GraphRepresentation.cs" />
@@ -90,8 +90,11 @@
      <Compile Include="Assets\Code\Scripts\Utilities\TextDebug.cs" />
      <Compile Include="Assets\Code\Tests\RenderScripts.cs" />
      <Compile Include="Assets\Code\Tests\ScrollRectDebug.cs" />
+     <Compile Include="Assets\JournalEntry.cs" />
+     <Compile Include="Assets\JournalMenu.cs" />
      <Compile Include="Assets\SizeToScreen.cs" />
      <None Include="Assets\Images\EmotionalProperties2\Info.txt" />
+     <None Include="Assets\Images\JournalAssetsResized\Info.txt" />
      <None Include="Assets\Images\Breath Pacer\Info.txt" />
      <None Include="Assets\Images\Emotionl Landscape\Info.txt" />
      <None Include="Assets\Images\BreatPacerAssetsResized\Info.txt" />
