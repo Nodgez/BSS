@@ -17,13 +17,16 @@ public class JournalEntry : MonoBehaviour {
 
 	public void OpenInput(SaveData data)
 	{
+		if (journalInputInstance != null)
+			return;
+
 		string originalText = data.journalEntry;
 		if (originalText == null)
 			originalText = "";
-		if (journalInputInstance != null)
-			return;
+
 		journalInputInstance = Instantiate (journalInput) as GameObject;
 		journalInputInstance.transform.SetParent (journalMenu.transform);
+		journalMenu.transform.localScale = Vector3.one;
 		RectTransform inputRect = journalInputInstance.transform as RectTransform;
 		inputRect.offsetMax = Vector2.zero;
 		inputRect.offsetMin = Vector2.zero;
@@ -32,21 +35,27 @@ public class JournalEntry : MonoBehaviour {
 		input.text = originalText;
 		if (data.date != DateTime.Today) {
 			input.interactable = false;
-			return;
 		}
+		DateTime date = data.date;
 
 		journalInputInstance.GetComponentInChildren<Button> ().onClick.AddListener (delegate {
-			this.SaveEntry();
+			this.SaveEntry(date);
 		});
 	}
 
-	public void SaveEntry()
+	public void SaveEntry(DateTime date)
 	{
 		if (journalInputInstance == null)
 			return;
+		if (date != DateTime.Today) {
+			Destroy (journalInputInstance);
+			return;
+		}
 		SaveData data = journalMenu.history.GetTodayData ();
 		data.journalEntry = journalInputInstance.GetComponentInChildren<InputField> ().text;
+		GetComponentsInChildren<Text> () [0].text = data.journalEntry;
 		journalMenu.history.Save (data);
+		journalMenu.RefreshData ();
 		Destroy (journalInputInstance);
 	}
 }

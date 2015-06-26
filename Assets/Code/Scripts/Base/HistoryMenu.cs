@@ -10,6 +10,7 @@ public class HistoryMenu : Menu {
 	public HistoryButtonLayout historyDisplay;
 	public List<SaveData> graphCollection;
 	public DateTime dateOnDisplay;
+	public int dayOffset;
 	
 	protected static SaveHistory saveDataManager;
 	protected HistoryButtonLayout historyLayoutInstance;
@@ -24,7 +25,7 @@ public class HistoryMenu : Menu {
 		bool hasDataForToday = false;
 		for(int i = graphCollection.Count -1; i > -1; i--)
 		{
-			if(graphCollection[i].date == DateTime.Today){
+			if(graphCollection[i].date == DateTime.Today.AddDays((double)dayOffset)){
 				hasDataForToday = true;
 			}
 			if(graphCollection[i].emotions.Count <= 0)
