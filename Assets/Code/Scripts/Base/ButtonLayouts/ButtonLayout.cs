@@ -7,6 +7,14 @@ public class ButtonLayout : MonoBehaviour {
 	public MenuButton[] buttons;
 	protected ButtonPoint[] buttonPoints;
 
+	public ButtonPoint[] GetButtonPoints
+	{
+		get
+		{
+			return buttonPoints;
+		}
+	}
+
 	protected virtual void Start()
 	{
 		buttonPoints = new ButtonPoint[buttons.Length];
@@ -23,7 +31,7 @@ public class ButtonLayout : MonoBehaviour {
 			if(!buttons[a].interpComplete)
 				return;
 		}
-		
+	
 		//sets direction of wheel cycle
 		int incrementIndex = (int)GestureHandler.GetSwipeDirection;
 		

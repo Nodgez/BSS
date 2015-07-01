@@ -1,12 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\JournalEntry.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\Scripts\Base\ButtonLayouts\ButtonLayout.cs">
     <Files>
-      <File FileName="Assets\JournalEntry.cs" Line="22" Column="16" />
-      <File FileName="Assets\Code\Scripts\Actions\Emotional Landscape\SaveHistory.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Scripts\Actions\Emotional Landscape\Graph.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Scripts\Base\Menu.cs" Line="1" Column="1" />
-      <File FileName="Assets\JournalMenu.cs" Line="27" Column="15" />
+      <File FileName="Assets\Code\Scripts\Base\ButtonLayouts\CurveLayout.cs" Line="62" Column="1" />
+      <File FileName="Assets\Code\Scripts\Base\ButtonLayouts\ButtonLayout.cs" Line="26" Column="53" />
+      <File FileName="Assets\Code\Scripts\Utilities\GestureHandler.cs" Line="54" Column="2" />
+      <File FileName="Assets\Code\Scripts\MainMenu\MenuButton.cs" Line="44" Column="4" />
+      <File FileName="Assets\Code\Scripts\Utilities\MathExt.cs" Line="6" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -75,4 +75,23 @@ public class MenuButton : MonoBehaviour{
 		transform.SetSiblingIndex (buttonPoint.siblingIndex);
 		_interactable = buttonPoint.interactable;
 	}
+
+	public void Interpolate(float amount)
+	{
+		//check lerp complete
+		if (_interpPercent >= 1)
+		{
+			_button.interactable = _interactable;
+			interpComplete = true;
+			return;
+		}
+		
+		//increment interpolation and clamp it value
+		_interpPercent = (amount * 0.1f) % 1f;
+		_interpPercent = Mathf.Clamp (_interpPercent, 0, 1);
+
+		transform.position = Vector3.Lerp (pos_InterpStart, pos_InterpEnd, _interpPercent);
+		transform.localScale = Vector3.Lerp (sc_InterpStart, sc_InterpEnd, _interpPercent);
+		_image.color = new Color (1, 1, 1, Mathf.Lerp (col_InterpStart, col_InterpEnd, _interpPercent));
+	}
 }

@@ -55,9 +55,9 @@ public class GestureHandler : MonoBehaviour
 	void CheckGestureMoveMouse()
 	{
 		touchCurrent = Input.mousePosition;
-		touchDelta = touchCurrent - touchstart;
+		touchDelta = Camera.main.ScreenToWorldPoint(touchCurrent) - Camera.main.ScreenToWorldPoint(touchstart);
 		
-		if (touchDelta.sqrMagnitude > minSwipeDistance)
+		if (touchDelta.sqrMagnitude > 0)
 			gestureState = GestureState.Swiping;
 	}
 	
