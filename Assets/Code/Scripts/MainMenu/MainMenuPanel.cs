@@ -9,6 +9,10 @@ public class MainMenuPanel : SlidingPanel {
 	{
 		rectTransform = transform as RectTransform;
 		rectTransform.offsetMax = new Vector2 (Screen.width, 0);
+		onSlideComplete += delegate {
+			ButtonLayout layout = GetComponentInChildren<ButtonLayout>();
+			layout.enabled = !layout.enabled;
+		};
 	}
 
 	protected override void Update ()

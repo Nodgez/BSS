@@ -34,6 +34,7 @@ public class CurveLayout : ButtonLayout {
 		float interpValue = 0;
 		int index = 0;
 		int halfway = numberOfButtons / 2;
+
 		while(index < numberOfButtons)
 		{
 			if(index == halfway)
@@ -55,7 +56,15 @@ public class CurveLayout : ButtonLayout {
 		buttonPoints [index].position = _curveEnd;	//set up last point
 
 		for (int j = 0; j < buttonPoints.Length;j++)
+		{
 			buttonPoints[j].FindScale (buttonPoints [buttonPoints.Length / 2].position.x, buttonPoints [0].position.x);
+
+			int rightIndex = j + 1 <= numberOfButtons ? j + 1 : 0;
+			int leftIndex = j - 1 > - 1 ? j - 1 : numberOfButtons;
+
+			buttonPoints[j].leftPoint = buttonPoints[leftIndex];
+			buttonPoints[j].rightPoint = buttonPoints[rightIndex];
+		}
 
 		for(int i = 0; i < buttons.Length; i++)
 		{
@@ -63,6 +72,7 @@ public class CurveLayout : ButtonLayout {
 			buttons[i].transform.localScale = buttonPoints[i].scale;
 			buttons[i].transform.SetSiblingIndex(buttonPoints[i].siblingIndex);
 			buttons[i].GetComponent<Button>().image.color = new Color(1,1,1,buttonPoints[i].opacity);
+			buttons[i].currentPoint = buttonPoints[i];
 		}
 	}
 

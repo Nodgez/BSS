@@ -35,13 +35,7 @@ public class GestureHandler : MonoBehaviour
 	{
 		if (gestureState == GestureState.Completed)
 			gestureState = GestureState.None;
-#if UNITY_STANDALONE_WIN || UNITY_EDITOR
  		CheckEventStateMouse ();
-#endif
-
-#if UNITY_WP8 || UNITY_ANDROID
-		CheckGestureStateTouch();
-#endif
 	}
 
 	#region Mouse Code
@@ -144,7 +138,7 @@ public class GestureHandler : MonoBehaviour
 			break;
 
 		case TouchPhase.Moved:
-				if (touchDelta.sqrMagnitude > minSwipeDistance)
+				if (touchDelta.sqrMagnitude > 0)
 					gestureState = GestureState.Swiping;
 			break;
 	
@@ -164,24 +158,18 @@ public class GestureHandler : MonoBehaviour
 	{
 		get
 		{
-//			if(touchDelta.x > touchDelta.y)
-//			{
-				if(touchDelta.x > 0)
-					return SwipeDirection.Right;
-				else if(touchDelta.x < 0)
-					return SwipeDirection.Left;
-			//}
-
-//			else if(touchDelta.x < touchDelta.y)
-//			{
-//				if(touchDelta.y > 0)
-//					return SwipeDirection.Up;
-//				else if(touchDelta.y < 0)
-//					return SwipeDirection.Down;
-//			}
+			if(touchDelta.x > 0)
+				return SwipeDirection.Right;
+			else if(touchDelta.x < 0)
+				return SwipeDirection.Left;
 
 			return SwipeDirection.None;
 		}
+	}
+
+	public static void ResetGesture()
+	{
+		gestureState = GestureState.None;
 	}
 
 	public static bool OnTouchOver(GameObject obj,float minDistance)

@@ -6,6 +6,7 @@ public class ButtonLayout : MonoBehaviour {
 
 	public MenuButton[] buttons;
 	protected ButtonPoint[] buttonPoints;
+	GestureState previousState = GestureState.None;
 
 	public ButtonPoint[] GetButtonPoints
 	{
@@ -18,59 +19,58 @@ public class ButtonLayout : MonoBehaviour {
 	protected virtual void Start()
 	{
 		buttonPoints = new ButtonPoint[buttons.Length];
+		for(int i = 0; i < buttonPoints.Length;i++)
+		{
+			buttonPoints [i] = new ButtonPoint ();
+		}
 	}
-
+	
 	protected virtual void Update () 
 	{
 		//checks for a finised swipe event
-		if (GestureHandler.gestureState != GestureState.Swiping)
-			return;
-		//checks all buttons have completed interpolating
-		for(int a = 0; a < buttons.Length;a++)
+		if (GestureHandler.gestureState == GestureState.Swiping) 
 		{
-			if(!buttons[a].interpComplete)
-				return;
-		}
-	
-		//sets direction of wheel cycle
-		int incrementIndex = (int)GestureHandler.GetSwipeDirection;
-		
-		for(int i = 0;i < buttons.Length;i++)
-		{
-			Vector3 buttonPos = buttons[i].transform.position;		//button's position
-			for(int j = 0; j < buttonPoints.Length;j++)
+			if (previousState != GestureState.Swiping)
 			{
-				//ensure that both rounded to check accurately
-				MathExt.RoundVector(ref buttonPos);
-				MathExt.RoundVector(ref buttonPoints[j].position);
-				
-				//if the button is not at this point in the wheel then continue to the next wheel point
-				if(buttonPos != buttonPoints[j].position)
-					continue;
-				
-				bool movingLeft = GestureHandler.GetSwipeDirection == SwipeDirection.Left;
-				
-				//start interpolating button to the next wheel point values
-				if(j + incrementIndex >= buttonPoints.Length)
-					buttons[i].StartInterpolation(buttonPoints[0],movingLeft);
-				else if(j + incrementIndex < 0)
-					buttons[i].StartInterpolation(buttonPoints[buttonPoints.Length -1], movingLeft);
-				else
-					buttons[i].StartInterpolation(buttonPoints[j + incrementIndex], movingLeft);
-				
-				break;	//exit the search for wheel points
+				for (int i = 0; i < buttons.Length; i++)
+					buttons [i].StartInterpolation (GestureHandler.GetSwipeDirection);
+			}
+
+			else
+			{
+				for (int j = 0; j < buttons.Length; j++)
+				{
+					float interpAmount = GestureHandler.touchDelta.sqrMagnitude * 0.1f;
+					buttons [j].Interpolate (interpAmount);
+				}
 			}
 		}
+
+		else
+		{
+			for (int k = 0; k < buttons.Length; k++)
+			{
+				if(!buttons[k].interpComplete)
+				{
+					buttons [k].AutoInterpolate (Time.deltaTime * 2);
+				}
+			}
+		}
+
+		previousState = GestureHandler.gestureState;
 	}
 }
 
-public struct ButtonPoint
+public class ButtonPoint
 {
 	public Vector3 position;
 	public Vector3 scale;
 	public float opacity;
 	public int siblingIndex;
 	public bool interactable;
+
+	public ButtonPoint leftPoint;
+	public ButtonPoint rightPoint;
 	
 	public void FindScale(float min, float max, bool xRelative = true)
 	{

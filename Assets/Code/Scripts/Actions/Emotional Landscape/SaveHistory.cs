@@ -57,13 +57,12 @@ public class SaveHistory {
 	public List<SaveData> Load()
 	{
 		fs = new FileStream (directory, FileMode.Open);
-		List<SaveData> allGraphs = new List<SaveData> ();
 
 		try
 		{
 			XmlSerializer serializer = new XmlSerializer (typeof(List<SaveData>));
 			List<SaveData> data = serializer.Deserialize (fs) as List<SaveData>;
-			allGraphs = data;
+			saveData = data;
 		}
 
 		catch
@@ -72,7 +71,8 @@ public class SaveHistory {
 			return new List<SaveData>();
 		}
 		fs.Close ();
-		return allGraphs;
+
+		return saveData;
 	}
 
 	public SaveData GetTodayData()

@@ -37,7 +37,7 @@ public class EPMenu : HistoryMenu {
 		base.Update ();
 	}
 
-	public override void SwapGraphInfo (System.DateTime date)
+	public override void SwapGraphInfo (DateTime date)
 	{
 		base.SwapGraphInfo (date);
 
