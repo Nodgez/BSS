@@ -2,11 +2,12 @@
 using System;
 using System.Collections;
 
-public class ButtonLayout : MonoBehaviour {
+public abstract class ButtonLayout : MonoBehaviour {
 
 	public MenuButton[] buttons;
 	protected ButtonPoint[] buttonPoints;
 	GestureState previousState = GestureState.None;
+	private SwipeDirection initialDirection;
 
 	public ButtonPoint[] GetButtonPoints
 	{
@@ -32,15 +33,20 @@ public class ButtonLayout : MonoBehaviour {
 		{
 			if (previousState != GestureState.Swiping)
 			{
+				initialDirection = GestureHandler.GetSwipeDirection;
 				for (int i = 0; i < buttons.Length; i++)
-					buttons [i].StartInterpolation (GestureHandler.GetSwipeDirection);
+					buttons [i].StartInterpolation (initialDirection);
 			}
 
 			else
 			{
 				for (int j = 0; j < buttons.Length; j++)
 				{
-					float interpAmount = GestureHandler.touchDelta.sqrMagnitude * 0.1f;
+					float interpAmount;
+					if(initialDirection == SwipeDirection.Left)
+						interpAmount = ((float)GestureHandler.GetSwipeDirection * 0.05f) * -1;
+					else
+						interpAmount = ((float)GestureHandler.GetSwipeDirection * 0.05f);
 					buttons [j].Interpolate (interpAmount);
 				}
 			}
@@ -56,7 +62,6 @@ public class ButtonLayout : MonoBehaviour {
 				}
 			}
 		}
-
 		previousState = GestureHandler.gestureState;
 	}
 }

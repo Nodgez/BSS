@@ -23,11 +23,11 @@ public class EmotionDisplay : MonoBehaviour,IDragHandler, IEndDragHandler {
 			menu.RemoveEmotionFromGraph (emotion.emotionName);
 			if(emotion.emotionType == EmotionType.Emergency)
 			{
-				menu.emotionsPanels[1].GetComponentInChildren<ELMenuEmotions>().ReturnEmotionToList(emotion.emotionName);
+				menu.emotionsPanels[1].GetComponentInChildren<ELMenuEmotions>().ReturnEmotionToList(emotion);
 			}
 			else
 			{
-				menu.emotionsPanels[0].GetComponentInChildren<ELMenuEmotions>().ReturnEmotionToList(emotion.emotionName);
+				menu.emotionsPanels[0].GetComponentInChildren<ELMenuEmotions>().ReturnEmotionToList(emotion);
 			}
 		};
 		

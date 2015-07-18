@@ -58,6 +58,7 @@
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\ELMenuEmotions.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\Emotion.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\EmotionDisplay.cs" />
+     <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\EmotionListItem.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\EmotionalCollection.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\Graph.cs" />
      <Compile Include="Assets\Code\Scripts\Actions\Emotional Landscape\GraphHistory.cs" />

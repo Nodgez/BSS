@@ -13,8 +13,6 @@ public enum GestureState
 public enum SwipeDirection {
 	Left = -1,
 	Right = 1,
-	Up = -1,
-	Down = 1,
 	None = 0
 }
 
@@ -27,6 +25,8 @@ public class GestureHandler : MonoBehaviour
 	public float tapTimeLimit = 0.25f;
 	public float minSwipeDistance = 3;
 
+	private Vector3 touchLastFrame;
+	private static Vector3 mouseFrameDelta;
 	private Vector3 touchstart = Vector3.zero;
 	private Vector3 touchCurrent = Vector3.zero;
 	private float tapTimer;
@@ -50,9 +50,14 @@ public class GestureHandler : MonoBehaviour
 	{
 		touchCurrent = Input.mousePosition;
 		touchDelta = Camera.main.ScreenToWorldPoint(touchCurrent) - Camera.main.ScreenToWorldPoint(touchstart);
-		
+		mouseFrameDelta = Camera.main.ScreenToWorldPoint(touchCurrent) - Camera.main.ScreenToWorldPoint(touchLastFrame);
+
 		if (touchDelta.sqrMagnitude > 0)
 			gestureState = GestureState.Swiping;
+
+
+
+		touchLastFrame = Input.mousePosition;
 	}
 	
 	void EndGestureMouse ()
@@ -158,9 +163,13 @@ public class GestureHandler : MonoBehaviour
 	{
 		get
 		{
-			if(touchDelta.x > 0)
+			//Debug.Log("Is Mouse Down : " + Input.GetMouseButtonDown(0));
+			if(!Input.GetMouseButton(0))
+				return SwipeDirection.None;
+
+			if(mouseFrameDelta.x > 0)
 				return SwipeDirection.Right;
-			else if(touchDelta.x < 0)
+			else if(mouseFrameDelta.x  < 0)
 				return SwipeDirection.Left;
 
 			return SwipeDirection.None;

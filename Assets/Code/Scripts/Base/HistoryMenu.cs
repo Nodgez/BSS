@@ -16,6 +16,7 @@ public class HistoryMenu : Menu {
 	
 	protected override void Start () 
 	{
+		dateOnDisplay = DateTime.Today;
 		//create a new graph history pointing to the location where the data is stored
 		if(saveDataManager == null)
 			saveDataManager = new SaveHistory (Application.persistentDataPath + "//Graph.xml");

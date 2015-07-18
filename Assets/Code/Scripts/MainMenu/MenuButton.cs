@@ -39,8 +39,9 @@ public class MenuButton : MonoBehaviour{
 			targetPoint = currentPoint.leftPoint;
 		else
 			targetPoint = currentPoint.rightPoint;
+
 		//reset interpolation values
-		Debug.Log ("Interp Started");
+		//Debug.Log ("Interp Started");
 		_interpPercent = 0;
 		interpComplete = false;
 
@@ -56,7 +57,7 @@ public class MenuButton : MonoBehaviour{
 		if (interpComplete)
 			return;
 		//increment interpolation and clamp it value
-		_interpPercent = amount;
+		_interpPercent += amount;
 		_interpPercent = Mathf.Clamp (_interpPercent, 0, 1);
 
 		transform.position = Vector3.Lerp (pos_InterpStart, targetPoint.position, _interpPercent);
@@ -74,16 +75,16 @@ public class MenuButton : MonoBehaviour{
 		else if (_interpPercent == 0f) 
 		{
 			interpComplete = true;
-			Debug.Log("InterpComplete");
+			//Debug.Log("InterpComplete");
 		}
 	}
 
 	public void AutoInterpolate(float increment)
 	{
 		if(_interpPercent > 0.5f)
-			_interpPercent += increment;
+			Interpolate (increment);
 		else
-			_interpPercent -= increment;
-		Interpolate (_interpPercent);
+			Interpolate (-increment);
+
 	}
 }

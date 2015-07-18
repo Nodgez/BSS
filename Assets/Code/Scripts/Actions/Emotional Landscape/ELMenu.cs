@@ -11,7 +11,6 @@ public class ELMenu : HistoryMenu {
 	public EmotionalCollection availableEmotions;
 	public Graph visibleGraph;
 	public GameObject addEmotionForm;
-	private Emotion selectedEmotion;
 	private List<Button> emotionButtons = new List<Button> ();
 	
 	protected override void Start()
@@ -59,7 +58,7 @@ public class ELMenu : HistoryMenu {
 		base.Update ();
 	}
 	
-	private void AddEmotionToGraph()
+	public void AddEmotionToGraph(Vector3 position, Emotion selectedEmotion)
 	{
 		if (dateOnDisplay != DateTime.Today || visibleGraph.GetDisplayedEmotions.Count >= 5)
 			return;
@@ -71,7 +70,7 @@ public class ELMenu : HistoryMenu {
 		displayPrefab.GetComponentInChildren<Text> ().text = selectedEmotion.emotionName;
 		displayPrefab.name = selectedEmotion.emotionName;
 		displayPrefab.emotion = selectedEmotion;
-		Vector3 position = Input.mousePosition;//GetTouch(0).position;
+		position = Camera.main.WorldToScreenPoint (position);
 
 		//ensure correct positioning
 		if (position.x > screenCenter.x && selectedEmotion.emotionType == EmotionType.Positive)
@@ -161,13 +160,13 @@ public class ELMenu : HistoryMenu {
 		SaveCurrentEmotionalState ();
 	}
 	
-	public void SelectEmotion(int i)
-	{
-		selectedEmotion = availableEmotions.GetEmotion (i);
-		SaveScreenState ();
-		CloseOpenPanels ();
-		AddEmotionToGraph ();
-	}
+//	public void SelectEmotion(int i)
+//	{
+//		selectedEmotion = availableEmotions.GetEmotion (i);
+//		SaveScreenState ();
+//		CloseOpenPanels ();
+//		AddEmotionToGraph ();
+//	}
 	
 	public override void SwapGraphInfo (DateTime date)
 	{
