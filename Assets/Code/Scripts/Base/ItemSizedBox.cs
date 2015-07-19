@@ -13,10 +13,20 @@ public class ItemSizedBox : MonoBehaviour {
 
 	private RectTransform rectTransform;
 	public int size;
+	public bool sizeBasedOnChildren = true;
 	int storedSize;
+
+	void Start()
+	{
+		if (sizeBasedOnChildren)
+			size = transform.childCount;
+	}
 
 	// Update is called once per frame
 	void Update () {
+		if (sizeBasedOnChildren)
+			size = transform.childCount;
+
 		if (size == storedSize)
 			return;
 		rectTransform = transform as RectTransform;
