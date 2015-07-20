@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using System.Collections.Generic;
 using System.Linq;
 
 public class ELMenuEmotions : MonoBehaviour {
@@ -33,7 +32,6 @@ public class ELMenuEmotions : MonoBehaviour {
 
 		for (int i = 0; i < emotionsToStore.Count; i++) {
 			//get the emotion I want from the overall list of emotions
-			int index = emotionalCollection.IndexOf (emotionsToStore [i]);
 			EmotionListItem listItem = Instantiate (listItemPrefab) as EmotionListItem;
 			listItem.name = emotionsToStore [i].emotionName;
 			listItem.GetComponentInChildren<Text> ().text = emotionsToStore [i].emotionName;

@@ -96,7 +96,6 @@
      <Compile Include="Assets\Code\Scripts\Utilities\TextDebug.cs" />
      <Compile Include="Assets\Code\Tests\RenderScripts.cs" />
      <Compile Include="Assets\Code\Tests\ScrollRectDebug.cs" />
-     <Compile Include="Assets\EmotionsPanel.cs" />
      <None Include="Assets\Images\EmotionalProperties2\Info.txt" />
      <None Include="Assets\Images\JournalAssetsResized\Info.txt" />
      <None Include="Assets\Images\Breath Pacer\Info.txt" />

@@ -7,7 +7,6 @@ using System.Collections;
 public class JournalMenu : MonoBehaviour {
 
 	public SaveHistory history;
-	List<JournalEntry> journalEntries = new List<JournalEntry	>();
 	public JournalEntry journalTabPrefab;
 	public GameObject journalEntriesContainer;
 

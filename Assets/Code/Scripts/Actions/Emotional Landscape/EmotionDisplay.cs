@@ -13,7 +13,7 @@ public class EmotionDisplay : MonoBehaviour,IDragHandler, IEndDragHandler {
 	private UnityAction buttonAction;
 	private RectTransform rectTransform;
 	private RectTransform canvasRectTransform;
-	private Vector2 pointerOffset;
+	private Vector2 pointerOffset = Vector2.zero;
 	private Vector3 screenPos;
 	
 	void Start () 
@@ -70,10 +70,10 @@ public class EmotionDisplay : MonoBehaviour,IDragHandler, IEndDragHandler {
 					localPointerPosition = new Vector2(0,localPointerPosition.y);
 			}
 			
-			if(Vector2.Distance(localPointerPosition, screenCenter) > 200)
+			if(Vector2.Distance(localPointerPosition, screenCenter) > 400)
 			{
 				Vector2 direction = localPointerPosition - screenCenter;
-				localPointerPosition = direction.normalized * 200;
+				localPointerPosition = direction.normalized * 400;
 			}
 			
 			rectTransform.localPosition = localPointerPosition - pointerOffset;

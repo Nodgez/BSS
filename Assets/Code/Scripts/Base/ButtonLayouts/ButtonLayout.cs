@@ -44,9 +44,9 @@ public abstract class ButtonLayout : MonoBehaviour {
 				{
 					float interpAmount;
 					if(initialDirection == SwipeDirection.Left)
-						interpAmount = ((float)GestureHandler.GetSwipeDirection * 0.05f) * -1;
+						interpAmount = ((float)GestureHandler.GetSwipeDirection * 0.15f) * -1;
 					else
-						interpAmount = ((float)GestureHandler.GetSwipeDirection * 0.05f);
+						interpAmount = ((float)GestureHandler.GetSwipeDirection * 0.15f);
 					buttons [j].Interpolate (interpAmount);
 				}
 			}
@@ -58,7 +58,7 @@ public abstract class ButtonLayout : MonoBehaviour {
 			{
 				if(!buttons[k].interpComplete)
 				{
-					buttons [k].AutoInterpolate (Time.deltaTime * 2);
+					buttons [k].AutoInterpolate (Time.deltaTime * 2.5f);
 				}
 			}
 		}

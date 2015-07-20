@@ -8,20 +8,19 @@ public class EmotionListItem : MonoBehaviour,IBeginDragHandler, IDragHandler, IE
 	public Emotion emotion;
 	public EmotionDisplay emoDisplayPrefab;
 	private RectTransform canvasRectTransform;
-	private RectTransform landscapeTransform;
 	private ELMenu elMenu;
-	private Vector2 pointerOffset;
+	private Vector2 pointerOffset = Vector2.zero;
 
 	// Use this for initialization
 	void Start () {
 		canvasRectTransform = GameObject.Find ("Canvas").transform as RectTransform;
-		landscapeTransform = GameObject.Find ("Landscape").transform as RectTransform;
 		elMenu = GameObject.FindObjectOfType<ELMenu> ();
 	}
 
 	public void OnBeginDrag(PointerEventData data)
 	{
 		transform.SetParent (canvasRectTransform);
+		elMenu.CloseOpenPanels ();
 	}
 
 	public void OnDrag (PointerEventData data) {
@@ -44,10 +43,10 @@ public class EmotionListItem : MonoBehaviour,IBeginDragHandler, IDragHandler, IE
 					localPointerPosition = new Vector2(0,localPointerPosition.y);
 			}
 			
-			if(Vector2.Distance(localPointerPosition, screenCenter) > 200)
+			if(Vector2.Distance(localPointerPosition, screenCenter) > 400)
 			{
 				Vector2 direction = localPointerPosition - screenCenter;
-				localPointerPosition = direction.normalized * 200;
+				localPointerPosition = direction.normalized * 400;
 			}
 			
 			rectTransform.localPosition = localPointerPosition - pointerOffset;

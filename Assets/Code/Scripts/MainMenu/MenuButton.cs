@@ -9,7 +9,6 @@ public class MenuButton : MonoBehaviour{
 	private Vector3 pos_InterpStart;
 	private float _interpPercent = 1;
 	private Image _image;				//the button Image
-	private float interpSpeed = 5;
 	private Button _button;
 	private ButtonPoint targetPoint;
 
