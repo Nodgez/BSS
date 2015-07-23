@@ -3,14 +3,20 @@ using System.Collections;
 
 public class EscapeListener : MonoBehaviour {
 
-	// Use this for initialization
+	public SlidingPanel mainMenuPanel;
+
 	void Start () {
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Escape))
-			Application.Quit ();
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+		
+			if(mainMenuPanel.IsSlid)
+				mainMenuPanel.SlideView();
+			else
+				Application.Quit ();
+		}
 	}
 }

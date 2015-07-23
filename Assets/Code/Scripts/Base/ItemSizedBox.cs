@@ -14,6 +14,7 @@ public class ItemSizedBox : MonoBehaviour {
 	private RectTransform rectTransform;
 	public int size;
 	public bool sizeBasedOnChildren = true;
+	public int spacing = 40;
 	int storedSize;
 
 	void Start()
@@ -30,7 +31,7 @@ public class ItemSizedBox : MonoBehaviour {
 		if (size == storedSize)
 			return;
 		rectTransform = transform as RectTransform;
-		float heightOfBox = size * 40;
+		float heightOfBox = size * spacing;
 		rectTransform.offsetMax = new Vector2 (rectTransform.offsetMax.x, 0);
 		rectTransform.offsetMin = new Vector2 (rectTransform.offsetMin.x, -heightOfBox);
 

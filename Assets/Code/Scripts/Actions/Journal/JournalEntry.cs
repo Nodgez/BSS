@@ -53,7 +53,8 @@ public class JournalEntry : MonoBehaviour {
 		}
 		SaveData data = journalMenu.history.GetTodayData ();
 		data.journalEntry = journalInputInstance.GetComponentInChildren<InputField> ().text;
-		GetComponentsInChildren<Text> () [0].text = data.journalEntry;
+		if(data.journalEntry != "")
+			GetComponentsInChildren<Text> () [0].text = data.journalEntry;
 		journalMenu.history.Save (data);
 		journalMenu.RefreshData ();
 		Destroy (journalInputInstance);
