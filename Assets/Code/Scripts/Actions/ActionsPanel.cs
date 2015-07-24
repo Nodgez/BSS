@@ -19,7 +19,7 @@ public class ActionsPanel : MonoBehaviour {
 		if (_actionInstance != null)
 			CloseAction ();
 
-		_actionInstance = Instantiate <GameObject>(actions [actionIndex]);
+		_actionInstance = Instantiate<GameObject> (actions [actionIndex]);
 		RectTransform actionTransform = _actionInstance.transform as RectTransform;
 		actionTransform.SetParent(this.transform);
 		actionTransform.localScale = Vector3.one;

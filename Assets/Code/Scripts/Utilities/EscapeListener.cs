@@ -14,7 +14,10 @@ public class EscapeListener : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape)) {
 		
 			if(mainMenuPanel.IsSlid)
+			{
 				mainMenuPanel.SlideView();
+				GetComponent<CloseSkillButton>().FindAndClose();
+			}
 			else
 				Application.Quit ();
 		}

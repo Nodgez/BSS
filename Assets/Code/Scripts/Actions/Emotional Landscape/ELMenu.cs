@@ -23,7 +23,7 @@ public class ELMenu : HistoryMenu {
 		{
 			//Get the slding event and add toggle  scrips to trigger on it's completion
 			SlidingPanel silder = masterMenuSlider.GetComponent<SlidingPanel> ();
-			silder.onSlideTo += ToggleDisabledObjects;
+			silder.onSlideComplete += ToggleDisabledObjects;
 			silder.onSlideTo += delegate {
 				//If data exists for today then load it
 				SwapGraphInfo (DateTime.Today);
@@ -60,8 +60,20 @@ public class ELMenu : HistoryMenu {
 	
 	public void AddEmotionToGraph(Vector3 position, Emotion selectedEmotion)
 	{
-		if (dateOnDisplay != DateTime.Today || visibleGraph.GetDisplayedEmotions.Count >= 5)
+		Debug.Log ("Passed Position : " + position.ToString ());
+		if (dateOnDisplay != DateTime.Today || visibleGraph.GetDisplayedEmotions.Count >= 5) {
+			Debug.Log("Returned on Add Emotion, Date : " + dateOnDisplay.ToShortDateString() +
+			          "Emotion count : " + visibleGraph.GetDisplayedEmotions.Count);
+			if(selectedEmotion.emotionType == EmotionType.Emergency)
+			{
+				emotionsPanels[1].GetComponentInChildren<ELMenuEmotions>().ReturnEmotionToList(selectedEmotion);
+			}
+			else
+			{
+				emotionsPanels[0].GetComponentInChildren<ELMenuEmotions>().ReturnEmotionToList(selectedEmotion);
+			}
 			return;
+		}
 		Vector3 screenCenter = new Vector3 (Screen.width * 0.5f, Screen.height * 0.5f, 10);
 		//Create a prefab for the display
 		EmotionDisplay displayPrefab = Instantiate (emotionDisplay) as EmotionDisplay;
@@ -71,24 +83,23 @@ public class ELMenu : HistoryMenu {
 		displayPrefab.name = selectedEmotion.emotionName;
 		displayPrefab.emotion = selectedEmotion;
 		position = Camera.main.WorldToScreenPoint (position);
+		Debug.Log ("Position world to Screen : " + position.ToString ());
 
 		//ensure correct positioning
 		if (position.x > screenCenter.x && selectedEmotion.emotionType == EmotionType.Positive)
 			position = new Vector3 (screenCenter.x, position.y, 0);
 		else if(position.x < screenCenter.x && selectedEmotion.emotionType == EmotionType.Emergency)
 			position = new Vector3 (screenCenter.x, position.y, 0);
-		
-		if(Vector2.Distance(position, screenCenter) > 200)
+
+		if(Vector2.Distance(position, screenCenter) > 400)
 		{
 			Vector3 direction = position - screenCenter;
-			position = direction.normalized * 200;
+			position = direction.normalized * 400;
+			Debug.Log("defaulting to screen space : " + position.ToString());
 		}
 
-		//recalibrate posiitions for world space
 		position = Camera.main.ScreenToWorldPoint (position);
-		position = new Vector3 (position.x,
-		                        position.y,
-		                        0);
+		Debug.Log ("Set Position : " + position.ToString ());
 		displayPrefab.transform.position = position;
 		displayPrefab.emotion.position = position;
 		visibleGraph.AddEmotion (displayPrefab);
@@ -200,5 +211,8 @@ public class ELMenu : HistoryMenu {
 		GameObject form = Instantiate (addEmotionForm) as GameObject;
 		form.transform.SetParent (this.transform);
 		form.transform.localScale = Vector3.one;
+		RectTransform formTransform = form.transform as RectTransform;
+		formTransform.offsetMax = Vector2.zero;
+		formTransform.offsetMin = Vector2.zero;
 	}
 }

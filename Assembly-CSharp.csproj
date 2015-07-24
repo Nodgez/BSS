@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\BindMainMenuSlide.cs" />
+     <Compile Include="Assets\ChildrenSorter.cs" />
      <Compile Include="Assets\CloseSkillButton.cs" />
      <Compile Include="Assets\Code\Interfaces\IFade.cs" />
      <Compile Include="Assets\Code\Interfaces\ISlidable.cs" />

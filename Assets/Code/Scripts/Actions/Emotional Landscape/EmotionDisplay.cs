@@ -43,11 +43,6 @@ public class EmotionDisplay : MonoBehaviour,IDragHandler, IEndDragHandler {
 				continue;
 			Rect thisRect = button.image.rectTransform.rect;
 			Rect otherRect = emoDisplay.button.image.rectTransform.rect;
-			
-			if(thisRect.Overlaps(otherRect))
-			{
-				Debug.Log("OverlapDetected");
-			}
 		}
 	}
 	
